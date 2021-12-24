@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/client/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/client/style.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js" ></script>
+    <title>JOJOAPI</title>
+</head>
+<body >
+    <div id="conteudo">
+    <header id="topo">
+       <a href="/">  <div class="navleft"><img src="/client/logo.png" alt="image"></div></a>
+        <div class="navright">
+
+            <ul>
+                <li><a href="/">home</a></li>
+                <li><a href="/about">about</a></li>
+                <li><a href="/howtouse">how to use</a></li> 
+                <li><a href="/admin/editpassword">edit password</a></li>              
+            </ul>
+        </div>
+    </header>
+
+
+</aside>
+
+    <section class='edit'> 
+    
+        <article>
+<form action="/admin/create" id="formstand" method="post">
+    <div class="blockform">
+       <h2>stand</h2>
+        <input type="text" name="name" id="standname"placeholder="stand name">
+        <input type="text" name="user" id="standuser"placeholder="stand user">
+        <input type="text" name="desc" id="description" placeholder="description">
+        <input type="text" name="img" id="img"placeholder="image url">
+        <input type="text" name="color" id="color" placeholder="color of graph">
+    </div>
+        <div class="blockform">
+        <h2>atributes</h2>
+           <select name="power" id="power">
+                <option value="150,35">A</option>
+                <option value="150,45">B</option>
+                <option value="150,55">C</option>
+                <option value="150,60">D</option>
+                <option value="150,70">E</option>			
+           </select>
+           <select name="speed" id="speed">
+                 <option value="220,55">A</option>
+                <option value="200,60">B</option>
+                 <option value="185,65">C</option>
+                 <option value="175,70">D</option>
+                <option value="160,70">E</option>
+           </select>
+           <select name="range" id="range">
+                <option value=" 220,95">A</option>
+                <option value="200,90">B</option>
+                <option value="195,85">C</option>
+                <option value="170,85">D</option>
+                <option value="160,80">E</option>
+           </select>
+           <select name="durability" id="durability">
+                <option value="150,112">A</option>
+                <option value="150,105">B</option>
+                <option value="150,100">C</option>
+                <option value="150,90">D</option>
+                <option value="150,85">E</option>
+            			
+           </select>
+           <select name="precision" id="precision">
+        <option value="85,95">A</option>
+        <option value="100,90">B</option>
+         <option value="110,85">C</option>
+        <option value="115,75">D</option>
+        <option value="140,80">E</option>
+            				
+           </select>
+
+
+           <select name="potential" id="potential">
+            <option value="80,55">A</option>
+            <option value="100,60">B</option>
+            <option value="110,65">C</option>
+            <option value="130,60">D</option>
+            <option value="140,70">E</option>
+            
+            				   
+        </div>
+   
+<input type="submit" value="criar" id="submite">
+<input type="reset" value="reset" id="reset">
+</form>
+
+        </article>
+        <article id="standsblocks"> 
+     
+
+
+        </article>
+
+
+        <a href="admin/exit" id="exit"><h2>sair</h2></a>
+        </section>
+         
+        <footer>
+         
+         </footer>
+</div>
+<script src="/client/script.js"></script>
+</body>
+</html>
