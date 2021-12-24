@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const adm = require('./routes/adm')
 const pages = require('./Pages')
 const route = require('./routes/rote');
-const port = 8080;
+const port = process.env.PORT || 8080;
 const session = require('express-session')
 
 server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
@@ -14,7 +14,7 @@ server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitial
 
 
 server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')//quem pode acessar a api
+    res.header('Access-Control-Allow-Origin', '*')//quem pode acessar a api
     res.header('Acess-Control-Allow-Headers', 'Origin,X-Requrested-With ,Content-Type, Accept,Autorization');
 
     if (req.method == 'OPTIONS') {
