@@ -1,13 +1,13 @@
 const express = require('express');
 const server = express();
 const morgan = require('morgan');
-const adm = require('./routes/adm')
-const pages = require('./Pages')
-const route = require('./routes/rote');
 const port = process.env.PORT || 8080;
 const session = require('express-session')
-
+const path = require("path")
+const dados=require('./src/data/dados.json')
 server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
+server.set("views", path.join(__dirname, 'views'))
+server.set("view engine", "ejs")
 
 
 //header
@@ -27,28 +27,39 @@ server.use((req, res, next) => {
 
 }
 
-
 )
 server.use((req, res, next) => {
     res.locals.admin = false;
     next()
 })
 
+server.use(express.static(__dirname + '/public'));
+server.get('/',(req,res)=>{
+    res.render('index.ejs',{key:"home"})
+})
 
-server.use(morgan('dev'))
-server.use(express.urlencoded({ extended: false }));
-server.use(express.json());
-server.use(express.json())
-server.use('/', pages);
-server.use('/jojostands', route);
-server.use('/admin', adm);
+server.get('/howtouse',(req,res)=>{
+    res.render('index.ejs',{key:"how"})
+})
+
+server.get('/about',(req,res)=>{
+    res.render('index.ejs',{key:"about"})
+})
+server.get('/hexagraph',(req,res)=>{
+    res.render('index.ejs',{key:"hex"})
+})
+server.get('/jojostands',(req,res)=>{
+    res.send(dados)
+})
+server.get('/jojostands/stand/:n',(req,res)=>{
+    res.send(dados[req.params.n])
+})
 
 server.use((req, res, next) => {
-    const erro = new Error("Não encontrado");
+    const erro = new Error("not found");
     erro.status = 404;
     next(erro);
 })
-
 
 server.use((erro, req, res, next) => {
     res.status(erro.status || 500)
@@ -58,7 +69,7 @@ server.use((erro, req, res, next) => {
     </head>
     <body>
     <h1>erro ${erro.status}</h1> 
-    <img src="https://toppng.com/public/uploads/thumbnail/kono-dio-da-jojo-dio-11562871580glkom16en7.png">
+    <img width="100px" src="https://www.pinclipart.com/picdir/big/151-1519806_anime-face-png-graphic-black-and-white-kono.png">
     <p>
    
     você achou que ia char uma pagina, mas achou eu ERRO ${erro.status}!
