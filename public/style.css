@@ -224,7 +224,8 @@ select {
     flex-wrap: wrap;
     width: 100%;
 }
-
+#erro{color:white; text-align: center;}
+#erro h1{font-size: 42px;}
 article p {
     margin-bottom: 15px;
 }

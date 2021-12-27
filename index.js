@@ -10,7 +10,7 @@ server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitial
 server.set("views", path.join(__dirname, 'views'))
 server.set("view engine", "ejs")
 
-function save(){
+function savedata(){
     fs.writeFileSync('./src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
 }
 
@@ -55,17 +55,24 @@ server.get('/hexagraph',(req,res)=>{
 })
 server.get('/jojostands',(req,res)=>{
     info.acess+=1
-
-    
     res.send(dados)
 })
 server.get('/jojostands/stand/:n',(req,res)=>{
     if(dados[req.params.n]==undefined){
-        res.status(404).redirect('/err')
+        res.status(404).send()
     }else{
         info.acess+=1
+   
     res.send(dados[req.params.n])}
 })
+//admin
+
+
+
+
+
+
+//admin
 
 server.use((req, res, next) => {
     const erro = new Error("not found");
@@ -75,25 +82,7 @@ server.use((req, res, next) => {
 
 server.use((erro, req, res, next) => {
     res.status(erro.status || 500)
-    return res.send(`
-    <head>
-   <title>ERRO ${erro.status} </title>
-    </head>
-    <body>
-    <h1>erro ${erro.status}</h1> 
-    <img width="100px" src="https://www.pinclipart.com/picdir/big/151-1519806_anime-face-png-graphic-black-and-white-kono.png">
-    <p>
-   
-    você achou que ia char uma pagina, mas achou eu ERRO ${erro.status}!
-    </p> 
-    <hr>
-    <p>
-    ${erro}
-    </p>
-    
-    recarregue a pagina ou volte para a home
-
-    </body>`)
+    return res.render('erro.ejs',{erro:erro.status,msg:erro})
 
 
 
