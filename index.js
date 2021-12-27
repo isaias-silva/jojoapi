@@ -40,7 +40,7 @@ server.use((req, res, next) => {
 
 server.use(express.static(__dirname + '/public'));
 server.get('/',(req,res)=>{
-    res.render('index.ejs',{key:"home",acess:info.acess})
+    res.render('index.ejs',{key:"home",acess:info.acess,linkapi:info.github})
 })
 
 server.get('/howtouse',(req,res)=>{
@@ -65,14 +65,14 @@ server.get('/jojostands/stand/:n',(req,res)=>{
    
     res.send(dados[req.params.n])}
 })
-//admin
+//admin#####################################
 
 
 
 
 
 
-//admin
+//admin#####################################
 
 server.use((req, res, next) => {
     const erro = new Error("not found");

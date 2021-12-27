@@ -151,6 +151,8 @@ article {
 }
 
 pre {
+    padding: 5px;
+    border-radius: 10px;
     background: white;
     width: 70%;
  
@@ -330,4 +332,13 @@ footer {
     100% {
         filter: contrast(1);
     }
+}
+.link_exit{
+    font-size: 24px;
+    color:rgb(209, 35, 209)
+}
+
+.link_exit:hover{
+    color:rgb(243, 109, 255);
+    text-decoration: solid;
 }
