@@ -65,6 +65,9 @@ server.get('/jojostands/stand/:n',(req,res)=>{
    
     res.send(dados[req.params.n])}
 })
+server.get('/guide',(req,res)=>{
+    res.render('index.ejs',{key:"guide",acess:info.acess,data:dados})
+})
 //admin#####################################
 
 

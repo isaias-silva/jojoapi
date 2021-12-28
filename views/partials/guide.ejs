@@ -1,0 +1,34 @@
+<section>
+    <article class="aviso">
+        ⭐the JoJo API is free, to help us with our projects via donation⭐
+    </article>
+
+<article id="guide">
+    <h2>guide</h2>
+    <p>the stands have the attributes:
+        <ul>
+            <li>name:name of stand</li>
+            <li>user:user of stand</li>
+            <li>description:description of powers</li>
+            <li>image: image of stand</li>
+            <li>color:color for the background of stand</li>
+            <li>stats:(for the graph)</li>
+        </ul>
+    </p>
+    <p>the API is constantly adjusting the lists of stands that are already in it:</p>
+    <div id="standsguide">
+        <%for(let i in data)  {%>
+            <div class="std">
+                <ul>
+                    <li>number: <%=i%></li> 
+                
+                </ul>
+                <img src=<%=data[i].img  %>  alt="stando">
+                <h4 style=<%=`background-color:${data[i].color}`%>;><%=data[i].name  %> </h4>
+             
+            </div>
+        <% } %>  
+    </div>
+    
+    </article>
+</section>

@@ -271,7 +271,7 @@ article.hexagraph img {
     border-radius: 10px;
     overflow: hidden;
     border: white solid 1px;
-    animation: blocks infinite 60s;
+ 
 }
 
 .std h4 {
@@ -285,7 +285,7 @@ article.hexagraph img {
 .std img {
     height: 90%;
     width: 100%;
-    filter: opacity(0.7);
+    filter: opacity(0.5);
 }
 
 footer {
