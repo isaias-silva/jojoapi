@@ -219,6 +219,7 @@ select {
     background-color: black;
     width: 100%;
     height: 100%;
+   text-align: center;
 }
 
 #standsblocks {
@@ -274,12 +275,14 @@ article.hexagraph img {
  
 }
 
-.std h4 {
+.std ul {
     background-color: purple;
     text-align: center;
     height: 10%;
-    font-size: 20px;
-    text-shadow: 2px 2px black;
+    font-size: 16px;
+    text-shadow: 2px 2px 2px black;
+    height: auto;
+   font-weight: bold;
 }
 
 .std img {

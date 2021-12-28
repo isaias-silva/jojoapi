@@ -19,12 +19,15 @@
     <div id="standsguide">
         <%for(let i in data)  {%>
             <div class="std">
-                <ul>
+                <ul style=<%=`background-color:${data[i].color};`%>>
+                    <li><%=data[i].name  %> </li>
+                    <li>id: <%=data[i].id%></li> 
                     <li>number: <%=i%></li> 
-                
+              
+                 
                 </ul>
                 <img src=<%=data[i].img  %>  alt="stando">
-                <h4 style=<%=`background-color:${data[i].color}`%>;><%=data[i].name  %> </h4>
+             
              
             </div>
         <% } %>  

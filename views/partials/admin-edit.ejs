@@ -1,6 +1,6 @@
-<section class='edit'> 
+<section> 
 
-    <article>
+<article>
 <form action="/admin/create" id="formstand" method="post">
 <div class="blockform">
    <h2>stand</h2>
@@ -66,9 +66,15 @@
 </form>
 
     </article>
-    <article id="standsblocks"> 
-
-
+    <article id="standsblocks">
+        <%for(let i in data) { %> 
+        <div class="standbloco">
+            <img src=<%=data[i].img  %>  alt="">
+            <div class="control">
+                <a href="/admin/apagar">apagar</a><a href="/admin/editar">editar</a>
+            </div>
+        </div>
+<%}  %> 
 
     </article>
 

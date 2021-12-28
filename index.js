@@ -5,13 +5,24 @@ const session = require('express-session')
 const path = require("path")
 const dados=require('./src/data/dados.json')
 const info=require('./src/data/info.json')
-const fs=require('fs')
+const fs=require('fs');
+const { Cookie } = require('express-session');
 server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
 server.set("views", path.join(__dirname, 'views'))
 server.set("view engine", "ejs")
 
 function savedata(){
     fs.writeFileSync('./src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
+}  
+
+function restrict(req, res, next) {
+    if (req.session.adm == true) {
+          console.log('acesso de adm')
+          next();
+    } else {
+
+          res.status(404).end();
+    }
 }
 
 //header
@@ -33,8 +44,8 @@ server.use((req, res, next) => {
 
 )
 server.use((req, res, next) => {
-    res.locals.admin = false;
-    
+ console.log( req.sessionID)
+
     next()
 })
 
@@ -57,7 +68,7 @@ server.get('/jojostands',(req,res)=>{
     info.acess+=1
     res.send(dados)
 })
-server.get('/jojostands/stand/:n',(req,res)=>{
+server.get('/jojostands/stand/number/:n',(req,res)=>{
     if(dados[req.params.n]==undefined){
         res.status(404).send()
     }else{
@@ -65,11 +76,24 @@ server.get('/jojostands/stand/:n',(req,res)=>{
    
     res.send(dados[req.params.n])}
 })
+server.get('/jojostands/stand/id/:id',(req,res)=>{
+    for(let i in dados){
+        info.acess+=1
+        if(dados[i].id==req.params.id){
+            res.send(dados[i])
+        }
+    }
+    res.status(404).send()
+})
 server.get('/guide',(req,res)=>{
     res.render('index.ejs',{key:"guide",acess:info.acess,data:dados})
 })
-//admin#####################################
+//adminrender#####################################
 
+server.get('/admin',restrict,(req,res)=>{
+    res.render('admin.ejs',{acess:info.acess,data:dados})
+
+})
 
 
 
