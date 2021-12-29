@@ -305,6 +305,7 @@ footer {
 
 
 @media screen and (max-width:600px) {
+    .std{width: 100%;}
     .navright ul li {
         display: block;
     }
