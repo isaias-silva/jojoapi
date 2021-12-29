@@ -5,23 +5,21 @@ const session = require('express-session')
 const path = require("path")
 const dados=require('./src/data/dados.json')
 const info=require('./src/data/info.json')
+const adm=require('./route/adm')
 const fs=require('fs');
 const { Cookie } = require('express-session');
 server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
-server.set("views", path.join(__dirname, 'views'))
-server.set("view engine", "ejs")
 
 function savedata(){
     fs.writeFileSync('./src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
 }  
-
 function restrict(req, res, next) {
     if (req.session.adm == true) {
           console.log('acesso de adm')
           next();
     } else {
 
-          res.status(404).end();
+          res.status(401).end();
     }
 }
 
@@ -44,12 +42,13 @@ server.use((req, res, next) => {
 
 )
 server.use((req, res, next) => {
- console.log( req.sessionID)
+
 
     next()
 })
 
 server.use(express.static(__dirname + '/public'));
+server.use('/admin',adm)
 server.get('/',(req,res)=>{
     res.render('index.ejs',{key:"home",acess:info.acess,linkapi:info.github})
 })
@@ -90,10 +89,7 @@ server.get('/guide',(req,res)=>{
 })
 //adminrender#####################################
 
-server.get('/admin',restrict,(req,res)=>{
-    res.render('admin.ejs',{acess:info.acess,data:dados})
 
-})
 
 
 
