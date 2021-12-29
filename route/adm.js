@@ -13,5 +13,10 @@ route.get('/',(req,res)=>{
     res.render('admin.ejs',{acess:info.acess,data:dados})
 
 })
+route.get('/exit',(req,res)=>{
+    req.session.adm=false
+    req.session.user=undefined
+    res.redirect('/')
 
+})
 module.exports=route
