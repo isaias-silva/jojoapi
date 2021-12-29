@@ -16,6 +16,9 @@ server.use(bodyParser.urlencoded({
   }));
 function savedata(){
     fs.writeFileSync('./src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
+}
+function saveinfo(){
+    fs.writeFileSync('./src/data/info.json',JSON.stringify(info),(x)=>{console.log('save and reload')})
 }  
 function restrict(req, res, next) {
     if (req.session.adm == true) {
@@ -70,6 +73,7 @@ server.get('/hexagraph',(req,res)=>{
 })
 server.get('/jojostands',(req,res)=>{
     info.acess+=1
+    saveinfo()
     res.send(dados)
 })
 server.get('/jojostands/stand/number/:n',(req,res)=>{
@@ -77,13 +81,14 @@ server.get('/jojostands/stand/number/:n',(req,res)=>{
         res.status(404).send()
     }else{
         info.acess+=1
-   
+        saveinfo()
     res.send(dados[req.params.n])}
 })
 server.get('/jojostands/stand/id/:id',(req,res)=>{
     for(let i in dados){
         info.acess+=1
         if(dados[i].id==req.params.id){
+           saveinfo()
             res.send(dados[i])
         }
     }
