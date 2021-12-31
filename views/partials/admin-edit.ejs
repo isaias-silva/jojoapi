@@ -8,7 +8,7 @@
     <input type="text" name="user" id="standuser"placeholder="stand user">
     <input type="text" name="desc" id="description" placeholder="description">
     <input type="text" name="img" id="img"placeholder="image url">
-    <input type="text" name="color" id="color" placeholder="color of graph">
+    <input type="color" name="color" id="color" placeholder="color of graph">
 </div>
     <div class="blockform">
     <h2>atributes</h2>
@@ -71,7 +71,7 @@
         <div class="standbloco">
             <img src=<%=data[i].img  %>  alt="">
             <div class="control">
-                <a href="/admin/apagar">apagar</a><a href="/admin/editar">editar</a>
+                <a href="/admin/del/<%=data[i].id%>">apagar</a><a href="/admin/action/edit/<%=data[i].id%> ">editar</a>
             </div>
         </div>
 <%}  %> 

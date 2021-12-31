@@ -14,9 +14,7 @@ server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitial
 server.use(bodyParser.urlencoded({
     extended: true
   }));
-function savedata(){
-    fs.writeFileSync('./src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
-}
+
 function saveinfo(){
     fs.writeFileSync('./src/data/info.json',JSON.stringify(info),(x)=>{console.log('save and reload')})
 }  
@@ -58,37 +56,37 @@ server.use((req, res, next) => {
 server.use(express.static(__dirname + '/public'));
 server.use('/admin',restrict,adm)
 server.get('/',(req,res)=>{
-    res.render('index.ejs',{key:"home",acess:info.acess,linkapi:info.github})
+ 
+    res.render('index.ejs',{key:"home",acess:dados.length,linkapi:info.github})
 })
 
 server.get('/howtouse',(req,res)=>{
-    res.render('index.ejs',{key:"how",acess:info.acess})
+    res.render('index.ejs',{key:"how",acess:dados.length})
 })
 
 server.get('/about',(req,res)=>{
-    res.render('index.ejs',{key:"about",acess:info.acess})
+    res.render('index.ejs',{key:"about",acess:dados.length})
 })
 server.get('/hexagraph',(req,res)=>{
-    res.render('index.ejs',{key:"hex",acess:info.acess})
+    res.render('index.ejs',{key:"hex",acess:dados.length})
 })
 server.get('/jojostands',(req,res)=>{
-    info.acess+=1
-    saveinfo()
+    
+   
     res.send(dados)
 })
 server.get('/jojostands/stand/number/:n',(req,res)=>{
     if(dados[req.params.n]==undefined){
         res.status(404).send()
     }else{
-        info.acess+=1
-        saveinfo()
+        
     res.send(dados[req.params.n])}
 })
 server.get('/jojostands/stand/id/:id',(req,res)=>{
     for(let i in dados){
-        info.acess+=1
+     
         if(dados[i].id==req.params.id){
-           saveinfo()
+   
             res.send(dados[i])
         }
     }
