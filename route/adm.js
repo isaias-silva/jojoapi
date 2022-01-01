@@ -19,7 +19,7 @@ route.use(bodyParser.urlencoded({
     fs.writeFileSync('../src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
 }
 route.get('/',(req,res)=>{
-    res.render('admin.ejs',{acess:info.acess,data:dados})
+    res.render('admin.ejs',{acess:dados.length,data:dados})
 
 })
 
