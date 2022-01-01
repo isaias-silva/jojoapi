@@ -1,7 +1,8 @@
 <section> 
 
 <article>
-<form action="/admin/create" id="formstand" method="post">
+<form action=<%=func  %>  id="formstand" method="post">
+    
 <div class="blockform">
    <h2>stand</h2>
     <input type="text" name="name" id="standname"placeholder="stand name">
@@ -12,7 +13,7 @@
 </div>
     <div class="blockform">
     <h2>atributes</h2>
-       <select name="power" id="power">
+       <select name="power" id="power" >
             <option value="150,35">A</option>
             <option value="150,45">B</option>
             <option value="150,55">C</option>
@@ -71,7 +72,7 @@
         <div class="standbloco">
             <img src=<%=data[i].img  %>  alt="">
             <div class="control">
-                <a href="/admin/del/<%=data[i].id%>">apagar</a><a href="/admin/action/edit/<%=data[i].id%> ">editar</a>
+                <a href="/admin/del/<%=data[i].id%>">apagar</a><a href="/admin/edit/<%=data[i].id%> ">editar</a>
             </div>
         </div>
 <%}  %> 
@@ -81,3 +82,27 @@
 
     <a href="exit" id="exit"><h2>sair</h2></a>
     </section>
+<script>
+const power=document.querySelector('#power')
+const speed=document.querySelector('#speed')
+const range=document.querySelector('#range')
+const durability=document.querySelector('#durability')
+const precision=document.querySelector('#precision')
+const potential=document.querySelector('#potential')
+const standname=document.querySelector('#standname')
+const standuser=document.querySelector('#standuser')
+const description=document.querySelector('#description')
+const img=document.querySelector('#img')
+const color=document.querySelector('#color')
+power.value='<%=obj.power%>'
+range.value='<%=obj.range%>'
+speed.value='<%=obj.speed%>'
+durability.value='<%=obj.durability%>'
+precision.value='<%=obj.precision%>'
+potential.value='<%=obj.potential%>'
+standname.value='<%=obj.name%>'
+standuser.value='<%=obj.user%>'
+description.value='<%=obj.desc%>'
+img.value='<%=obj.img%>'
+color.value='<%=obj.color%>'
+</script>
