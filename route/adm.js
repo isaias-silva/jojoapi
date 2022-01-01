@@ -3,7 +3,8 @@ const route = express();
 const path = require("path")
 const info=require('../src/data/info.json')
 const dados=require('../src/data/dados.json');
-const bodyParser=require('body-parser')
+const bodyParser=require('body-parser');
+const { create } = require('domain');
 
 const color=['\u001b[31m',
  '\u001b[34m',
@@ -28,8 +29,10 @@ route.get('/',(req,res)=>{
 
 
 route.post('/create',(req,res)=>{
-    console.log(color[1]+`${req.session.user} create ${req.body.name}`+color[2])
-    dados.push(req.body)
+    let obj=req.body
+    obj.id=parseInt(Math.random()*9999999)
+    console.log(color[1]+`${req.session.user} create ${obj.name}`+color[2])
+    dados.push(obj)
 res.redirect('/admin')
 })
 

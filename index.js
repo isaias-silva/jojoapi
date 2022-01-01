@@ -93,7 +93,7 @@ server.get('/jojostands/stand/id/:id',(req,res)=>{
     res.status(404).send()
 })
 server.get('/guide',(req,res)=>{
-    res.render('index.ejs',{key:"guide",acess:info.acess,data:dados})
+    res.render('index.ejs',{key:"guide",acess:dados.length,data:dados})
 })
 //adminrender#####################################
 server.get('/login',(req,res)=>{
