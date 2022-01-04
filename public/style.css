@@ -263,19 +263,41 @@ article.hexagraph img {
 }
 
 .std {
-    width: 250px;
-    margin: 10px;
-    height: 400px;
+    width:30%;
+    margin: 2px;
+    height: 350px;
     background: black;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     overflow: hidden;
     border: white solid 1px;
+    transition: 0.5s ease-in-out;
  
 }
+.std:hover{
+transform: rotate(360deg);
+cursor:pointer;
 
-.std ul {
+}
+
+.std:hover::after{
+  
+    content: " ";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top:0;
+background-image: url("https://ih1.redbubble.net/image.3022147354.9555/flat,750x1000,075,f.jpg");
+    background-size: 100%;
+    background-color: rgb(173, 0, 189);
+    transition: 0.5s ease-in-out;
+    }
+    .std:active::after{
+        filter:opacity(0)
+    }
+    .std ul {
     background-color: purple;
     text-align: center;
     height: 10%;
@@ -305,7 +327,8 @@ footer {
 
 
 @media screen and (max-width:600px) {
-    .std{width: 100%;}
+    #standguide{align-items: center;}
+    .std{width: 100%; height: auto;}
     .navright ul li {
         display: block;
     }
