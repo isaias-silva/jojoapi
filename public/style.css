@@ -277,6 +277,7 @@ article.hexagraph img {
 }
 .std:hover{
 transform: rotate(360deg);
+border-style: dashed;
 cursor:pointer;
 
 }
@@ -328,7 +329,7 @@ footer {
 
 @media screen and (max-width:600px) {
     #standguide{align-items: center;}
-    .std{width: 100%; height: auto;}
+    .std{width: 100%; min-height: 300; max-height: 300px;}
     .navright ul li {
         display: block;
     }
