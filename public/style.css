@@ -273,6 +273,7 @@ article.hexagraph img {
     overflow: hidden;
     border: white solid 1px;
     transition: 0.5s ease-in-out;
+
  
 }
 .std:hover{
@@ -283,15 +284,15 @@ cursor:pointer;
 }
 
 .std:hover::after{
-  
+ 
     content: " ";
     display: block;
     height: 100%;
     width: 100%;
     position: absolute;
     top:0;
-background-image: url("https://ih1.redbubble.net/image.3022147354.9555/flat,750x1000,075,f.jpg");
-    background-size: 100%;
+background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte80nIGElD6ppDXwT9jn3Hxzlgnvj-6FjNOHb0vWiBi0Frl_azYLgO_TMnMiVGgjRQwY&usqp=CAU");
+    background-size: 50%;
     background-color: rgb(173, 0, 189);
     transition: 0.5s ease-in-out;
     }
@@ -309,7 +310,7 @@ background-image: url("https://ih1.redbubble.net/image.3022147354.9555/flat,750x
 }
 
 .std img {
-    height: 90%;
+    height: 300px;
     width: 100%;
     filter: opacity(0.5);
 }
@@ -325,11 +326,21 @@ footer {
 }
 
 #exit{text-align: center;}
+#grap{position: relative; display: flex; justify-content: space-between; width: 100%;}
 
+.block img{filter: invert(100%);}
+#status{ filter: opacity(60%);
+    background-color: rgba(128, 0, 128, 0.357);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 20px;}
 
 @media screen and (max-width:600px) {
     #standguide{align-items: center;}
-    .std{width: 100%; min-height: 300; max-height: 300px;}
+    .std{width: 100%;height: 600px; }
+   .std img{height: 100%;}
     .navright ul li {
         display: block;
     }
