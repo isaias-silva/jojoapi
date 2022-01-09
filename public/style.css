@@ -336,7 +336,7 @@ footer {
     left: 0;
     height: 100%;
     border-radius: 20px;}
-
+#formstand input{ background-color: black;}
 @media screen and (max-width:600px) {
     #standguide{align-items: center;}
     .std{width: 100%;height: 600px; }
