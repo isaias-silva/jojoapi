@@ -19,7 +19,7 @@ function saveinfo(){
     fs.writeFileSync('./src/data/info.json',JSON.stringify(info),(x)=>{console.log('save and reload')})
 }  
 function restrict(req, res, next) {
-    if (req.session.adm == true) {
+    if (req.session.adm == true && req.session.baned==false) {
         if(req.session.user==undefined){
             res.status(401).end();
         }else{next();}
@@ -107,6 +107,9 @@ server.post('/aut',(req,res)=>{
            req.session.adm=true
            req.session.user=x.user
            res.redirect('/admin/')
+       }else{
+           req.session.baned=true
+           console.log(req.session)
        }
    })
 })
