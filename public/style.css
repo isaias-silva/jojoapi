@@ -337,6 +337,20 @@ footer {
     height: 100%;
     border-radius: 20px;}
 #formstand input{ background-color: black;}
+#standstats {
+    position: relative;
+}
+
+#standstats canvas {
+    filter: opacity(60%);
+    background-color: rgba(255, 0, 255, 0.131);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
 @media screen and (max-width:600px) {
     #standguide{align-items: center;}
     .std{width: 100%;height: 600px; }

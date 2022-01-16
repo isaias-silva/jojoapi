@@ -15,19 +15,72 @@
         </p>
 
         <p>
-            in JoJo the radar chart is used to classify the skill levels of the stands, namely: POWER, PRECISION,
+            in JoJo the radar chart is used to classify the skill levels of the stand namely: POWER, PRECISION,
             DURABILITY, RANGE, POTENTIAL and SPEED
         </p>
         <p style="color:rgb(255, 0, 255)"> this is the default image to use on the canvas, others can be used as long as
             they are square 600x600 </p>
         <div id="grap">
             <div class="block">
-                <img src="http://pm1.narvii.com/6539/2af5d814ffd06101c415d49124e62752b1d440c8_00.jpg" alt="i">
-
+                
+                <div id="standstats">
+                    
+                    
+                    <img src="http://pm1.narvii.com/6539/2af5d814ffd06101c415d49124e62752b1d440c8_00.jpg" alt="i">
             
+
+                    <canvas id="status"> 
+                        
+                    </canvas>
+                </div>
             </div>
    
     </article>
+    <script>
+    function setGraf() {
+    const graf = document.getElementById("status");
+
+
+    let ctx = graf.getContext("2d");
+    let p = '<%=data[0].potential%>'.split(",").map((x)=>{return parseInt(x)})
+       
+    console.log(p)
+    let pr = '<%=data[0].precision;%>'.split(",").map((x)=>{return parseInt(x)})
+    let dur = '<%=data[0].durability;%>'.split(",").map((x)=>{return parseInt(x)})
+    let rag = '<%=data[0].range%>'.split(",").map((x)=>{return parseInt(x)})
+    let vel = '<%=data[0].speed%>'.split(",").map((x)=>{return parseInt(x)})
+    let power = '<%=data[0].power%>'.split(",").map((x)=>{return parseInt(x)})
+
+    ctx.clearRect(0, 0, graf.width, graf.height);
+    ctx.fillStyle = '<%=data[0].color%>'
+    ctx.beginPath();
+
+    //potencial
+    ctx.moveTo(p[0], p[1]);
+    ctx.lineTo(pr[0], pr[1]);
+    //precision
+
+    ctx.lineTo(dur[0], dur[1]);
+    //durabilidade
+
+    ctx.lineTo(rag[0], rag[1]);
+    //range
+
+    ctx.lineTo(vel[0], vel[1]);
+    //velocidade
+
+    ctx.lineTo(power[0], power[1]);
+    //poder
+
+    ctx.lineTo(p[0], p[1]);
+
+    ctx.fill();
+
+    ctx.closePath();
+
+    ctx.stroke();}
+    setGraf()
+    </script>
 
 
 

@@ -68,7 +68,7 @@ server.get('/about',(req,res)=>{
     res.render('index.ejs',{key:"about",acess:dados.length})
 })
 server.get('/hexagraph',(req,res)=>{
-    res.render('index.ejs',{key:"hex",acess:dados.length})
+    res.render('index.ejs',{key:"hex",acess:dados.length,data:dados})
 })
 server.get('/jojostands',(req,res)=>{
     
