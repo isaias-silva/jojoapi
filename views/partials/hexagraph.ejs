@@ -22,65 +22,123 @@
             they are square 600x600 </p>
         <div id="grap">
             <div class="block">
-                
-                <div id="standstats">
-                    
-                    
-                    <img src="http://pm1.narvii.com/6539/2af5d814ffd06101c415d49124e62752b1d440c8_00.jpg" alt="i">
-            
 
-                    <canvas id="status"> 
-                        
+                <div id="standstats">
+
+
+                    <img src="http://pm1.narvii.com/6539/2af5d814ffd06101c415d49124e62752b1d440c8_00.jpg" alt="i">
+
+
+                    <canvas id="status">
+
                     </canvas>
                 </div>
+                <div class="box-ed">
+
+
+                    <div class="blockform">
+
+                        <h2>atributes</h2>
+
+
+                        <select name="power" id="power">
+                            <option value="150,35">A</option>
+                            <option value="150,45">B</option>
+                            <option value="150,55">C</option>
+                            <option value="150,60">D</option>
+                            <option value="150,70">E</option>
+                        </select>
+
+                        <select name="speed" id="speed">
+                            <option value="220,55">A</option>
+                            <option value="200,60">B</option>
+                            <option value="185,65">C</option>
+                            <option value="175,70">D</option>
+                            <option value="160,70">E</option>
+                        </select>
+
+                        <select name="range" id="range">
+                            <option value=" 220,95">A</option>
+                            <option value="200,90">B</option>
+                            <option value="195,85">C</option>
+                            <option value="170,85">D</option>
+                            <option value="160,80">E</option>
+                        </select>
+
+                        <select name="durability" id="durability">
+                            <option value="150,112">A</option>
+                            <option value="150,105">B</option>
+                            <option value="150,100">C</option>
+                            <option value="150,90">D</option>
+                            <option value="150,85">E</option>
+
+                        </select>
+
+                        <select name="precision" id="precision">
+
+                            <option value="85,95">A</option>
+                            <option value="100,90">B</option>
+                            <option value="110,85">C</option>
+                            <option value="115,75">D</option>
+                            <option value="140,80">E</option>
+
+                        </select>
+
+                        <select name="potential" id="potential">
+                            <option value="80,55">A</option>
+                            <option value="100,60">B</option>
+                            <option value="110,65">C</option>
+                            <option value="130,60">D</option>
+                            <option value="140,70">E</option>
+
+                        </select>
+
+                        <input type="submit" value="criar" id="crear">
+
+                        </form>
+                    </div>
+                    <div class="blockform">
+                        <input type="color" name="color" id="color">
+                    </div>
+                </div>
+
             </div>
-   
+
+        </div>
+       <p>it's important to use a style sheet that puts the canvas and png graphic in the same position, see example</p>
+ <p>add to a div the "stand stats" class and inside this div put the image and the canvas, set the canvas position as absolute and the div position as relative.</p>
+       <div class="example">
+<p>
+    
+    #standstats {
+    <br>
+        position: relative;
+    }
+    <br>
+    #standstats canvas {
+        <br>
+        filter: opacity(60%);
+        <br>
+        background-color:
+        <br> 
+        rgba(255, 0, 255, 0.131);
+        <br>
+        position: absolute;
+        <br>
+        top: 0;
+        <br>
+        left: 0;
+        <br>
+        width: 100%;
+        <br>
+        height: 100%;
+      <br>
+        border-radius: 20px;
+    }
+</p>
+</div>
     </article>
-    <script>
-    function setGraf() {
-    const graf = document.getElementById("status");
-
-
-    let ctx = graf.getContext("2d");
-    let p = '<%=data[0].potential%>'.split(",").map((x)=>{return parseInt(x)})
-       
-    console.log(p)
-    let pr = '<%=data[0].precision;%>'.split(",").map((x)=>{return parseInt(x)})
-    let dur = '<%=data[0].durability;%>'.split(",").map((x)=>{return parseInt(x)})
-    let rag = '<%=data[0].range%>'.split(",").map((x)=>{return parseInt(x)})
-    let vel = '<%=data[0].speed%>'.split(",").map((x)=>{return parseInt(x)})
-    let power = '<%=data[0].power%>'.split(",").map((x)=>{return parseInt(x)})
-
-    ctx.clearRect(0, 0, graf.width, graf.height);
-    ctx.fillStyle = '<%=data[0].color%>'
-    ctx.beginPath();
-
-    //potencial
-    ctx.moveTo(p[0], p[1]);
-    ctx.lineTo(pr[0], pr[1]);
-    //precision
-
-    ctx.lineTo(dur[0], dur[1]);
-    //durabilidade
-
-    ctx.lineTo(rag[0], rag[1]);
-    //range
-
-    ctx.lineTo(vel[0], vel[1]);
-    //velocidade
-
-    ctx.lineTo(power[0], power[1]);
-    //poder
-
-    ctx.lineTo(p[0], p[1]);
-
-    ctx.fill();
-
-    ctx.closePath();
-
-    ctx.stroke();}
-    setGraf()
-    </script>
+   
 
 
 
