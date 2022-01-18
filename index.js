@@ -19,7 +19,7 @@ function saveinfo(){
     fs.writeFileSync('./src/data/info.json',JSON.stringify(info),(x)=>{console.log('save and reload')})
 }  
 function restrict(req, res, next) {
-    if (req.session.adm == true && req.session.baned==false) {
+    if (req.session.adm == true) {
         if(req.session.user==undefined){
             res.status(401).end();
         }else{next();}
@@ -68,7 +68,7 @@ server.get('/about',(req,res)=>{
     res.render('index.ejs',{key:"about",acess:dados.length})
 })
 server.get('/hexagraph',(req,res)=>{
-    res.render('index.ejs',{key:"hex",acess:dados.length,data:dados})
+    res.render('index.ejs',{key:"hex",acess:dados.length})
 })
 server.get('/jojostands',(req,res)=>{
     

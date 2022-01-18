@@ -277,7 +277,7 @@ article.hexagraph img {
  
 }
 .std:hover{
-transform: rotate(360deg);
+transform: scale(0.9);
 border-style: dashed;
 cursor:pointer;
 
@@ -291,9 +291,8 @@ cursor:pointer;
     width: 100%;
     position: absolute;
     top:0;
-background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTte80nIGElD6ppDXwT9jn3Hxzlgnvj-6FjNOHb0vWiBi0Frl_azYLgO_TMnMiVGgjRQwY&usqp=CAU");
     background-size: 50%;
-    background-color: rgb(173, 0, 189);
+    background-color: rgba(173, 0, 189, 0.207);
     transition: 0.5s ease-in-out;
     }
     .std:active::after{
