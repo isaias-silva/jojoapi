@@ -1,7 +1,15 @@
 # jojoapi
 <h2>⚙️ the api is in development ⚙️ </h2>
-<a href="https://jojosapi.herokuapp.com/">link of Api</a>
+<a href="https://jojo-api.herokuapp.com/">link of Api</a>
 <p>api returns data from jojo's bizarre adventures manga stands, the data returned in a json is:</p>
+<h2>usage</h2>
+<em>
+    const url = 'https://jojo-api.herokuapp.com/jojostands'
+
+   fetch(url).then((res) => {
+        return res.json()
+    }).then((data) => {}
+</em>
 <ul>
     <li>stand name</li>
     <li>user</li>
