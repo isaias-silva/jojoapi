@@ -91,6 +91,7 @@ server.get('/jojostands/stand/id/:id',(req,res)=>{
 server.get('/guide',(req,res)=>{
     res.render('index.ejs',{key:"guide",acess:dados.length,data:dados})
 })
+
 //adminrender#####################################
 server.get('/login',(req,res)=>{
 
@@ -114,7 +115,7 @@ server.post('/aut',(req,res)=>{
 
 
 
-//admin#####################################
+//admin
 
 server.use((req, res, next) => {
     const erro = new Error("not found");
