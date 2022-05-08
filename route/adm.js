@@ -32,7 +32,7 @@ route.get('/',(req,res)=>{
 route.post('/create',(req,res)=>{
     let obj=req.body
     obj.id=parseInt(Math.random()*9999999)
-    console.log(color[1]+`${req.session.user} create ${obj.name}`+color[2])
+    console.log(color[1]+`user ${req.session.user} create ${obj.name}`+color[2])
     dados.push(obj)
     savedata()
 res.redirect('/admin')
@@ -42,7 +42,7 @@ route.get('/del/:id',(req,res)=>{
    const data=dados
     for(let i in data){
         if (data[i].id==req.params.id){
-            console.log(color[0]+`${req.session.user} delete ${data[i].name}`+color[2])
+            console.log(color[0]+`user ${req.session.user} delete ${data[i].name}`+color[2])
             
             data.splice(i,1)
             savedata()
