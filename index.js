@@ -3,7 +3,6 @@ const server = express();
 const bodyParser=require('body-parser')
 const port = process.env.PORT || 8080;
 const session = require('express-session')
-const path = require("path")
 const dados=require('./src/data/dados.json')
 const info=require('./src/data/info.json')
 const adm=require('./route/adm')
@@ -29,9 +28,6 @@ function restrict(req, res, next) {
           res.status(401).end();
     }
 }
-
-//header
-
 
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')//quem pode acessar a api
