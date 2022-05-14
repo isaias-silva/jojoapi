@@ -20,19 +20,24 @@ route.use(bodyParser.urlencoded({
   function savedata(){
     fs.writeFileSync('./src/data/dados.json',JSON.stringify(dados),(x)=>{console.log('save and reload')})
 }
+function checkclass(req,res,next){
+    if(req.session.user.class!='admin'){
+        res.status(401).send('permissão negada!')
+    }else{
+    next()}
+}
+route.use('/del/:id',checkclass)
+route.use('/edit/:id',checkclass)
+route.use('/create',checkclass)
 route.get('/',(req,res)=>{
     res.render('admin.ejs',{acess:dados.length,data:dados,func:'/admin/create',obj:{}})
 
 })
 
-
-
-
-
-route.post('/create',(req,res)=>{
+route.post('/create',(req,res,checkclass)=>{
     let obj=req.body
     obj.id=parseInt(Math.random()*9999999)
-    console.log(color[1]+`user ${req.session.user} create ${obj.name}`+color[2])
+    console.log(color[1]+`user ${req.session.user.nick} create ${obj.name}`+color[2])
     dados.push(obj)
     savedata()
 res.redirect('/admin')

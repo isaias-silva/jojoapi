@@ -99,14 +99,13 @@ server.get('/login',(req,res)=>{
 
 })
 server.post('/aut',(req,res)=>{
-   authentific(req.body).then((x)=>{
-       if(x!=false){
+   authentific(req.body).then((user)=>{
+       if(user!=false){
            req.session.adm=true
-           req.session.user=x.user
+           req.session.user=user
            res.redirect('/admin/')
        }else{
            req.session.baned=true
-           console.log(req.session)
        }
    })
 })
