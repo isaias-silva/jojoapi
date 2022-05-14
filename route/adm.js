@@ -10,7 +10,7 @@ const { Router } = require('express');
 const color=['\u001b[31m',
  '\u001b[34m',
  '\u001b[0m',]
-
+const {logging}=require('../src/log')
 route.set("views", path.join(__dirname,'../views'))
 route.set("view engine", "ejs")
 route.use(express.static(path.join(__dirname , '../public')));
@@ -34,12 +34,14 @@ route.get('/',(req,res)=>{
 
 })
 
-route.post('/create',(req,res,checkclass)=>{
+route.post('/create',(req,res)=>{
     let obj=req.body
     obj.id=parseInt(Math.random()*9999999)
-    console.log(color[1]+`user ${req.session.user.nick} create ${obj.name}`+color[2])
+   let msg=`user ${req.session.user.nick} create ${obj.name}`
+    console.log(color[1]+msg+color[2]+'\n')
     dados.push(obj)
     savedata()
+    logging(msg)
 res.redirect('/admin')
 })
 
@@ -47,10 +49,12 @@ route.get('/del/:id',(req,res)=>{
    const data=dados
     for(let i in data){
         if (data[i].id==req.params.id){
-            console.log(color[0]+`user ${req.session.user} delete ${data[i].name}`+color[2])
+            msg=`user ${req.session.user.nick} delete ${data[i].name}`
+            console.log(color[0]+msg+color[2])
             
             data.splice(i,1)
             savedata()
+            logging(msg)
             res.redirect('/admin')
         }
     }
@@ -62,7 +66,9 @@ route.get('/edit/:id',(req,res)=>{
     for(let i in data){
         if (data[i].id==req.params.id){
            posi=i
-            console.log(`${req.session.user} editar ${data[i].name}`)
+           let msg=`${req.session.user.nick} editar ${data[i].name}`
+           console.log(msg)
+           logging(msg)
            
             }
     }
@@ -77,15 +83,18 @@ route.post('/save/:id',(req,res)=>{
         if (data[i].id==req.params.id){
             obj.id=data[i].id
             data[i]=obj
-            console.log(color[1]+`${req.session.user} save ${data[i].name}`+color[2])
+            let msg=`${req.session.user.nick} save ${data[i].name}`
+            console.log(color[1]+msg+color[2])
             
             savedata()
+            logging(msg)
             res.redirect('/admin')
         }}
 })
 route.get('/exit',(req,res)=>{
-    req.session.adm=false
+    req.session.login=false
     req.session.user=undefined
+    let msg=`exit user= ${req.session.user}`
     res.redirect('/')
 
 })

@@ -18,7 +18,7 @@ function saveinfo(){
     fs.writeFileSync('./src/data/info.json',JSON.stringify(info),(x)=>{console.log('save and reload')})
 }  
 function restrict(req, res, next) {
-    if (req.session.adm == true) {
+    if (req.session.login == true) {
         if(req.session.user==undefined){
             res.status(401).end();
         }else{next();}
@@ -101,7 +101,7 @@ server.get('/login',(req,res)=>{
 server.post('/aut',(req,res)=>{
    authentific(req.body).then((user)=>{
        if(user!=false){
-           req.session.adm=true
+           req.session.login=true
            req.session.user=user
            res.redirect('/admin/')
        }else{
