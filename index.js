@@ -1,115 +1,54 @@
+//libs
 const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+
+//middleware
+const restrict = require(`./middlewares/restrict`);
+
+//route
+const adm = require('./route/adm');
+
+//autentification
+const authentific = require('./src/authentific');
+
+//server
 const server = express();
-const bodyParser=require('body-parser')
 const port = process.env.PORT || 8080;
-const session = require('express-session')
-const dados=require('./src/data/dados.json')
-const info=require('./src/data/info.json')
-const adm=require('./route/adm')
-const fs=require('fs');
-const authentific=require('./src/authentific')
 
-server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
-server.use(bodyParser.urlencoded({
-    extended: true
-  }));
+//view engine 
+server.set(`view engine`, `ejs`);
+const dados = require('./src/data/dados.json');
+const info = require('./src/data/info.json');
+const page = require('./route/pages');
 
-function saveinfo(){
-    fs.writeFileSync('./src/data/info.json',JSON.stringify(info),(x)=>{console.log('save and reload')})
-}  
-function restrict(req, res, next) {
-    if (req.session.login == true) {
-        if(req.session.user==undefined){
-            res.status(401).end();
-        }else{next();}
-          
-    } else {
 
-          res.status(401).end();
-    }
-}
-
+//header & cors
 server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')//quem pode acessar a api
+    res.header('Access-Control-Allow-Origin', '*') //quem pode acessar a api
     res.header('Acess-Control-Allow-Headers', 'Origin,X-Requrested-With ,Content-Type, Accept,Autorization');
 
     if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT,POST,PATH,DELETE,GET')//CRUD
-        return res.status(200).send({});//resposta
+        res.header('Access-Control-Allow-Methods', 'PUT,POST,PATH,DELETE,GET') //CRUD
+        return res.status(200).send({}); //resposta
     }
-
-
     next();
-
-}
-
-)
-server.use((req, res, next) => {
-   
-    next()
 })
 
+//config
+
+//session
+server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
+server.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+//definindo diretorio raiz
 server.use(express.static(__dirname + '/public'));
-server.use('/admin',restrict,adm)
-server.get('/',(req,res)=>{
- 
-    res.render('index.ejs',{key:"home",acess:dados.length,linkapi:info.github})
-})
 
-server.get('/howtouse',(req,res)=>{
-    res.render('index.ejs',{key:"how",acess:dados.length})
-})
-
-server.get('/about',(req,res)=>{
-    res.render('index.ejs',{key:"about",acess:dados.length})
-})
-server.get('/hexagraph',(req,res)=>{
-    res.render('index.ejs',{key:"hex",acess:dados.length})
-})
-server.get('/jojostands',(req,res)=>{
-    
-   
-    res.send(dados)
-})
-server.get('/jojostands/stand/number/:n',(req,res)=>{
-    if(dados[req.params.n]==undefined){
-        res.status(404).send()
-    }else{
-        
-    res.send(dados[req.params.n])}
-})
-server.get('/jojostands/stand/id/:id',(req,res)=>{
-    for(let i in dados){
-     
-        if(dados[i].id==req.params.id){
-   
-            res.send(dados[i])
-        }
-    }
-    res.status(404).send()
-})
-server.get('/guide',(req,res)=>{
-    res.render('index.ejs',{key:"guide",acess:dados.length,data:dados})
-})
-
-//adminrender#####################################
-server.get('/login',(req,res)=>{
-
-    res.render('login-adm.ejs')
-
-})
-server.post('/aut',(req,res)=>{
-   authentific(req.body).then((user)=>{
-       if(user!=false){
-           req.session.login=true
-           req.session.user=user
-           res.redirect('/admin/')
-       }else{
-           req.session.baned=true
-       }
-   })
-})
-
+//rota adm
+server.use('/admin', restrict, adm)
+server.use('/', page)
 
 
 
@@ -124,7 +63,7 @@ server.use((req, res, next) => {
 
 server.use((erro, req, res, next) => {
     res.status(erro.status || 500)
-    return res.render('erro.ejs',{erro:erro.status,msg:erro})
+    return res.render('erro.ejs', { erro: erro.status, msg: erro })
 
 
 
