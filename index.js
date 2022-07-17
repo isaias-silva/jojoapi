@@ -8,6 +8,7 @@ const restrict = require(`./middlewares/restrict`);
 
 //route
 const adm = require('./route/adm');
+const page = require('./route/pages');
 
 //autentification
 const authentific = require('./src/authentific');
@@ -18,9 +19,8 @@ const port = process.env.PORT || 8080;
 
 //view engine 
 server.set(`view engine`, `ejs`);
-const dados = require('./src/data/dados.json');
-const info = require('./src/data/info.json');
-const page = require('./route/pages');
+
+
 
 
 //header & cors
