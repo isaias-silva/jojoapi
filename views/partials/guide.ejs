@@ -3,24 +3,24 @@
         ⭐the JoJo's API is free, to help us with our projects via donation⭐
     </article>
 
-<article id="guide">
-    <h2>guide</h2>
-    <p>the stands have the attributes:
-        <ul>
-            <li>name:name of stand</li>
-            <li>user:user of stand</li>
-            <li>description:description of powers</li>
-            <li>image: image of stand</li>
-            <li>color:color for the background of stand</li>
-            <li>stats:(for the graph)</li>
-        </ul>
-    </p>
-    <p>the API is constantly adjusting the lists of stands that are already in it:</p>
-    <div id="standsguide">
-        <%for(let i in data)  {%>
-           
-            <a  href="/jojostands/stand/id/<%=data[i].id %>" target="_blank" class="std" style=<%=`border-color:${data[i].color};`%> >
-                <ul style=<%=`background-color:${data[i].color}; `%>>
+    <article id="guide">
+        <h2>guide</h2>
+        <p>the stands have the attributes:
+            <ul>
+                <li>name:name of stand</li>
+                <li>user:user of stand</li>
+                <li>description:description of powers</li>
+                <li>image: image of stand</li>
+                <li>color:color for the background of stand</li>
+                <li>stats:(for the graph)</li>
+            </ul>
+        </p>
+        <p>the API is constantly adjusting the lists of stands that are already in it:</p>
+        <div id="standsguide">
+            <%for(let i in data)  {%>
+
+                <a href="/jojostands/stand/id/<%=data[i].id %>" target="_blank" class="std" style=<%=`border-color:${data[i].color};`%> >
+                <ul style=<%=`background-image:linear-gradient(black,${data[i].color}); `%>>
                     <li><%=data[i].name  %> </li>
                     <li>id: <%=data[i].id%></li> 
                     <li>number: <%=i%></li> 
@@ -31,9 +31,9 @@
              
              
             </a>
-           
-        <% } %>  
-    </div>
-    
+
+                <% } %>
+        </div>
+
     </article>
 </section>
