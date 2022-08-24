@@ -2,6 +2,7 @@ const express = require(`express`);
 const page = express();
 const dados = require('../src/data/dados.json');
 const info = require('../src/data/info.json');
+const authentific = require('../src/authentific');
 page.get('/', (req, res) => {
 
     res.render('index.ejs', { key: "home", acess: dados.length, linkapi: info.github })

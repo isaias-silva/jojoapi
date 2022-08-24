@@ -11,7 +11,7 @@ const color = ['\u001b[31m',
     '\u001b[34m',
     '\u001b[0m',
 ]
-const { logging } = require('../src/log')
+
 route.set("views", path.join(__dirname, '../views'))
 route.set("view engine", "ejs")
 route.use(express.static(path.join(__dirname, '../public')));
@@ -45,7 +45,7 @@ route.post('/create', (req, res) => {
     console.log(color[1] + msg + color[2] + '\n')
     dados.push(obj)
     savedata()
-    logging(msg)
+
     res.redirect('/admin')
 })
 
@@ -58,7 +58,7 @@ route.get('/del/:id', (req, res) => {
 
             data.splice(i, 1)
             savedata()
-            logging(msg)
+
             res.redirect('/admin')
         }
     }
@@ -72,7 +72,7 @@ route.get('/edit/:id', (req, res) => {
             posi = i
             let msg = `${req.session.user.nick} editar ${data[i].name}`
             console.log(msg)
-            logging(msg)
+
 
         }
     }
@@ -91,7 +91,7 @@ route.post('/save/:id', (req, res) => {
             console.log(color[1] + msg + color[2])
 
             savedata()
-            logging(msg)
+
             res.redirect('/admin')
         }
     }

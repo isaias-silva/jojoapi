@@ -10,9 +10,6 @@ const restrict = require(`./middlewares/restrict`);
 const adm = require('./route/adm');
 const page = require('./route/pages');
 
-//autentification
-const authentific = require('./src/authentific');
-
 //server
 const server = express();
 const port = process.env.PORT || 8080;
@@ -49,11 +46,7 @@ server.use(express.static(__dirname + '/public'));
 //rota adm
 server.use('/admin', restrict, adm)
 server.use('/', page)
-
-
-
-
-//admin
+    //admin
 
 server.use((req, res, next) => {
     const erro = new Error("not found");
