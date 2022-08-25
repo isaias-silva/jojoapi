@@ -127,3 +127,4 @@ yarn.lock
 .yarn/install-state.gz
 .pnp.*
 #ALTERATION
+temp/*
