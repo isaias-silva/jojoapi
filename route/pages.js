@@ -6,7 +6,6 @@ const info = require('../src/data/info.json');
 const { mongoose } = require('../model/db');
 const standSchema = require('../model/stand')
 const authentific = require('../src/authentific');
-const generateLinkbuff = require('../util/generateLinkbuff');
 page.get('/', (req, res) => {
 
     res.render('index.ejs', { key: "home", acess: dados.length, linkapi: info.github })
