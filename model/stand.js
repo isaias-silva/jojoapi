@@ -13,5 +13,5 @@ const standSchema = new mongoose.Schema({
     img: String,
     color: String
 
-}, { collection: 'stand' });
+}, { collection: 'stands' });
 module.exports = standSchema

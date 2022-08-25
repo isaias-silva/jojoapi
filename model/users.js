@@ -7,5 +7,5 @@ const userSchema = new mongoose.Schema({
     class: String
 
 
-}, { collection: 'stand' });
+}, { collection: 'users' });
 module.exports = userSchema
