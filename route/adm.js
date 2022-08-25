@@ -6,6 +6,7 @@ const dados = require('../src/data/dados.json');
 const bodyParser = require('body-parser');
 
 const fs = require('fs');
+const { mongoose } = require('../model/db');
 
 const color = ['\u001b[31m',
     '\u001b[34m',
@@ -41,6 +42,7 @@ route.get('/', (req, res) => {
 route.post('/create', (req, res) => {
     let obj = req.body
     obj.id = parseInt(Math.random() * 9999999)
+    mongoose
     let msg = `user ${req.session.user.nick} create ${obj.name}`
     console.log(color[1] + msg + color[2] + '\n')
     dados.push(obj)

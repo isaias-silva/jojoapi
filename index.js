@@ -17,9 +17,6 @@ const port = process.env.PORT || 8080;
 //view engine 
 server.set(`view engine`, `ejs`);
 
-
-
-
 //header & cors
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*') //quem pode acessar a api
@@ -32,15 +29,12 @@ server.use((req, res, next) => {
     next();
 })
 
-//config
-
 //session
 server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
 server.use(bodyParser.urlencoded({
     extended: true
 }));
 
-//definindo diretorio raiz
 server.use(express.static(__dirname + '/public'));
 
 //rota adm

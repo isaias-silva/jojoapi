@@ -1,7 +1,10 @@
 const express = require(`express`);
 const page = express();
+const axios= require('axios')
 const dados = require('../src/data/dados.json');
 const info = require('../src/data/info.json');
+const { mongoose } = require('../model/db');
+const standSchema = require('../model/stand')
 const authentific = require('../src/authentific');
 page.get('/', (req, res) => {
 
@@ -11,6 +14,24 @@ page.get('/', (req, res) => {
 page.get('/howtouse', (req, res) => {
     res.render('index.ejs', { key: "how", acess: dados.length })
 })
+/*
+page.get('/gravar',async (req,res)=>{
+    const Stands = mongoose.model('posts', standSchema, 'posts')
+    try {
+        for await (let item of dados ){
+            let stand=item
+            const img= await( await axios.get(item.img, { responseType: "arraybuffer" })).data   
+            stand.img=img
+            const standOne=new Stands(stand)
+           await standOne.save()
+        }
+        res.send("sucess")
+    } catch (err) {
+        res.sendStatus(501)
+    }
+
+  
+})*/
 
 page.get('/about', (req, res) => {
     res.render('index.ejs', { key: "about", acess: dados.length })
@@ -18,28 +39,27 @@ page.get('/about', (req, res) => {
 page.get('/hexagraph', (req, res) => {
     res.render('index.ejs', { key: "hex", acess: dados.length })
 })
-page.get('/jojostands', (req, res) => {
-
-
-    res.send(dados)
-})
-page.get('/jojostands/stand/number/:n', (req, res) => {
-    if (dados[req.params.n] == undefined) {
-        res.status(404).send()
-    } else {
-
-        res.send(dados[req.params.n])
+page.get('/jojostands', async (req, res) => {
+    const stands = mongoose.model('posts', standSchema, 'posts')
+    try {
+        let data = await stands.find({})
+        res.json(data)
+    } catch (err) {
+        res.sendStatus(501)
     }
 })
-page.get('/jojostands/stand/id/:id', (req, res) => {
-    for (let i in dados) {
 
-        if (dados[i].id == req.params.id) {
-
-            res.send(dados[i])
+page.get('/jojostands/stand/id/:id', async (req, res) => {
+    if(!req.params.id){
+        return res.sendStatus(404)
+       }
+       const stands = mongoose.model('posts', standSchema, 'posts')
+        try {
+            let data = await stands.find({id:req.params.id})
+            res.json(data)
+        } catch (err) {
+            res.sendStatus(501)
         }
-    }
-    res.status(404).send()
 })
 page.get('/guide', (req, res) => {
     res.render('index.ejs', { key: "guide", acess: dados.length, data: dados })
