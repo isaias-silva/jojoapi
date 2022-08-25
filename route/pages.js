@@ -6,6 +6,7 @@ const info = require('../src/data/info.json');
 const { mongoose } = require('../model/db');
 const standSchema = require('../model/stand')
 const authentific = require('../src/authentific');
+const generateLinkbuff = require('../util/generateLinkbuff');
 page.get('/', (req, res) => {
 
     res.render('index.ejs', { key: "home", acess: dados.length, linkapi: info.github })
@@ -43,8 +44,10 @@ page.get('/jojostands', async (req, res) => {
     const stands = mongoose.model('posts', standSchema, 'posts')
     try {
         let data = await stands.find({})
-        res.json(data)
+        const dataJson=await generateLinkbuff(data)
+        res.json(dataJson[0])
     } catch (err) {
+        console.log(err)
         res.sendStatus(501)
     }
 })
