@@ -41,8 +41,8 @@ page.get('/jojostands', async(req, res) => {
     const stands = mongoose.model('posts', standSchema, 'posts')
     try {
         let data = await stands.find({})
-        const dataJson = await generateLinkbuff(data)
-        res.json(dataJson[0])
+
+        res.json(data)
     } catch (err) {
         console.log(err)
         res.sendStatus(501)
