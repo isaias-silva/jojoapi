@@ -5,56 +5,50 @@ const info = require('../src/data/info.json');
 const { mongoose } = require('../model/db');
 const standSchema = require('../model/stand')
 const authentific = require('../src/authentific');
-const standinfo = require('../utils/standInfo');
+const standInfo = require('../utils/standInfo');
 
-let standNumber = 0
+let stands = null
 
 
-page.use(async (req,res,next)=>{
-   standNumber=(await standinfo()).length
-   next()
+page.use(async(req, res, next) => {
+    stands = await stands()
+    next()
 })
 page.get('/', (req, res) => {
 
-    res.render('index.ejs', { key: "home", acess: standNumber, linkapi: info.github })
+    res.render('index.ejs', { key: "home", acess: stands.length, linkapi: info.github })
 })
 
 page.get('/howtouse', (req, res) => {
-        res.render('index.ejs', { key: "how", acess: standNumber })
-    })
-    
-    /*
-    page.get('/gravar',async (req,res)=>{
-        const Stands = mongoose.model('stands', standSchema, 'stands')
-        try {
-            for await (let item of dados ){
-                const standOne=new Stands(item)
-               await standOne.save()
-            }
-            res.send("sucess")
-        } catch (err) {
-            res.sendStatus(501)
-        }
-
-      
-    })*/
-
-page.get('/about', (req, res) => {
-    res.render('index.ejs', { key: "about", acess: standNumber })
+    res.render('index.ejs', { key: "how", acess: stands.length })
 })
-page.get('/hexagraph', (req, res) => {
-    res.render('index.ejs', { key: "hex", acess: standNumber })
-})
-page.get('/jojostands', async(req, res) => {
-    const stands = mongoose.model('stands', standSchema, 'stands')
+
+/*
+page.get('/gravar',async (req,res)=>{
+    const Stands = mongoose.model('stands', standSchema, 'stands')
     try {
-        let data = await stands.find({})
-
-        res.json(data)
+        for await (let item of dados ){
+            const standOne=new Stands(item)
+           await standOne.save()
+        }
+        res.send("sucess")
     } catch (err) {
-        console.log(err)
         res.sendStatus(501)
     }
+
+  
+})*/
+
+page.get('/about', (req, res) => {
+    res.render('index.ejs', { key: "about", acess: stands.length })
+})
+page.get('/hexagraph', (req, res) => {
+    res.render('index.ejs', { key: "hex", acess: stands.length })
+})
+page.get('/jojostands', async(req, res) => {
+
+    res.json(stands)
+
 })
 
 page.get('/jojostands/stand/id/:id', async(req, res) => {
@@ -69,9 +63,9 @@ page.get('/jojostands/stand/id/:id', async(req, res) => {
         res.sendStatus(501)
     }
 })
-page.get('/guide',async (req, res) => {
-    const dados=await standinfo()
-    res.render('index.ejs', { key: "guide", acess: standNumber, data: dados })
+page.get('/guide', async(req, res) => {
+
+    res.render('index.ejs', { key: "guide", acess: stands.length, data: stands })
 })
 
 
