@@ -1,22 +1,31 @@
 const express = require(`express`);
 const page = express();
 const axios = require('axios')
-const dados = require('../src/data/dados.json');
 const info = require('../src/data/info.json');
 const { mongoose } = require('../model/db');
 const standSchema = require('../model/stand')
 const authentific = require('../src/authentific');
+const standinfo = require('../utils/standInfo');
+
+let standNumber = 0
+
+
+page.use(async (req,res,next)=>{
+   standNumber=(await standinfo()).length
+   next()
+})
 page.get('/', (req, res) => {
 
-    res.render('index.ejs', { key: "home", acess: dados.length, linkapi: info.github })
+    res.render('index.ejs', { key: "home", acess: standNumber, linkapi: info.github })
 })
 
 page.get('/howtouse', (req, res) => {
-        res.render('index.ejs', { key: "how", acess: dados.length })
+        res.render('index.ejs', { key: "how", acess: standNumber })
     })
+    
     /*
     page.get('/gravar',async (req,res)=>{
-        const Stands = mongoose.model('posts', standSchema, 'posts')
+        const Stands = mongoose.model('stands', standSchema, 'stands')
         try {
             for await (let item of dados ){
                 const standOne=new Stands(item)
@@ -31,13 +40,13 @@ page.get('/howtouse', (req, res) => {
     })*/
 
 page.get('/about', (req, res) => {
-    res.render('index.ejs', { key: "about", acess: dados.length })
+    res.render('index.ejs', { key: "about", acess: standNumber })
 })
 page.get('/hexagraph', (req, res) => {
-    res.render('index.ejs', { key: "hex", acess: dados.length })
+    res.render('index.ejs', { key: "hex", acess: standNumber })
 })
 page.get('/jojostands', async(req, res) => {
-    const stands = mongoose.model('posts', standSchema, 'posts')
+    const stands = mongoose.model('stands', standSchema, 'stands')
     try {
         let data = await stands.find({})
 
@@ -52,16 +61,17 @@ page.get('/jojostands/stand/id/:id', async(req, res) => {
     if (!req.params.id) {
         return res.sendStatus(404)
     }
-    const stands = mongoose.model('posts', standSchema, 'posts')
+    const stands = mongoose.model('stands', standSchema, 'stands')
     try {
-        let data = await stands.find({ id: req.params.id })
+        let data = await stands.findById(req.params.id)
         res.json(data)
     } catch (err) {
         res.sendStatus(501)
     }
 })
-page.get('/guide', (req, res) => {
-    res.render('index.ejs', { key: "guide", acess: dados.length, data: dados })
+page.get('/guide',async (req, res) => {
+    const dados=await standinfo()
+    res.render('index.ejs', { key: "guide", acess: standNumber, data: dados })
 })
 
 
