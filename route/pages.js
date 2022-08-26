@@ -11,7 +11,7 @@ let stands = null
 
 
 page.use(async(req, res, next) => {
-    stands = await stands()
+    stands = await standInfo()
     next()
 })
 page.get('/', (req, res) => {

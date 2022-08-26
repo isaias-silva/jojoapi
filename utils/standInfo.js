@@ -8,7 +8,7 @@ module.exports = async() => {
 
         return data
     } catch (err) {
-        console.log(err)
+        console.log(`erro no mongo`)
         return []
     }
 }
