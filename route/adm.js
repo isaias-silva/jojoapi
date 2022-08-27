@@ -3,8 +3,9 @@ const route = express();
 const path = require("path")
 const info = require('../src/data/info.json')
 const bodyParser = require('body-parser');
-const standSchema = require('../model/stand')
-const mongoose = require('../model/db')
+const standSchema = require('../model/standModel')
+const mongoose = require('../model/db');
+const { create } = require('../model/stands');
 
 
 const color = ['\u001b[31m',
@@ -39,13 +40,10 @@ route.post('/create', async (req, res) => {
     let obj = req.body
     obj.id = parseInt(Math.random() * 9999999)
 
-    let msg = `user ${req.session.user.nick} create ${obj.name}`
-    console.log(color[1] + msg + color[2] + '\n')
-    const Stands = mongoose.model('stands', standSchema, 'stands')
+
     try {
 
-        const standOne = new Stands(obj)
-        await standOne.save()
+       await create(obj)
         res.redirect('/admin')
     } catch (err) {
         res.sendStatus(501)

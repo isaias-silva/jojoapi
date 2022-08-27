@@ -3,15 +3,14 @@ const page = express();
 const axios = require('axios')
 const info = require('../src/data/info.json');
 const { mongoose } = require('../model/db');
-const standSchema = require('../model/stand')
+const standSchema = require('../model/standModel')
 const authentific = require('../src/authentific');
-const standInfo = require('../utils/standInfo');
+const { consult, consultOne } = require('../model/stands');
 
 let stands = null
 
-
-page.use(async(req, res, next) => {
-    stands = await standInfo()
+page.use(async (req, res, next) => {
+    stands = await consult()
     next()
 })
 page.get('/', (req, res) => {
@@ -45,25 +44,21 @@ page.get('/about', (req, res) => {
 page.get('/hexagraph', (req, res) => {
     res.render('index.ejs', { key: "hex", acess: stands.length })
 })
-page.get('/jojostands', async(req, res) => {
+page.get('/jojostands', async (req, res) => {
 
     res.json(stands)
 
 })
 
-page.get('/jojostands/stand/id/:id', async(req, res) => {
+page.get('/jojostands/stand/id/:id', async (req, res) => {
     if (!req.params.id) {
         return res.sendStatus(404)
     }
-    const stands = mongoose.model('stands', standSchema, 'stands')
-    try {
-        let data = await stands.findById(req.params.id)
-        res.json(data)
-    } catch (err) {
-        res.sendStatus(501)
-    }
+    let stand = await consultOne(req.params.id)
+    res.json(stand)
 })
-page.get('/guide', async(req, res) => {
+
+page.get('/guide', async (req, res) => {
 
     res.render('index.ejs', { key: "guide", acess: stands.length, data: stands })
 })
