@@ -9,6 +9,7 @@ const { consult, consultOne } = require('../model/stands');
 const { createUser } = require('../model/users');
 const bcrypt=require("bcrypt")
 
+const dados= require('../src/data/dados.json')
 let stands = null
 page.use(async (req, res, next) => {
     stands = await consult()
@@ -23,22 +24,6 @@ page.get('/', (req, res) => {
 page.get('/howtouse', (req, res) => {
     res.render('index.ejs', { key: "how", acess: stands.length })
 })
-
-/*
-page.get('/gravar',async (req,res)=>{
-    const Stands = mongoose.model('stands', standSchema, 'stands')
-    try {
-        for await (let item of dados ){
-            const standOne=new Stands(item)
-           await standOne.save()
-        }
-        res.send("sucess")
-    } catch (err) {
-        res.sendStatus(501)
-    }
-
-  
-})*/
 
 page.get('/about', (req, res) => {
     res.render('index.ejs', { key: "about", acess: stands.length })
@@ -68,7 +53,7 @@ page.get('/guide', async (req, res) => {
 
 page.get('/login', (req, res) => {
 
-    res.render('login-adm.ejs')
+    res.render('login-adm.ejs',{msg:''})
 
 })
 page.post('/aut', (req, res) => {
@@ -79,21 +64,9 @@ page.post('/aut', (req, res) => {
             res.redirect('/admin/')
         } else {
             req.session.baned = true
+            res.render('login-adm.ejs',{msg:'acesso negado!'})
         }
     })
 })
-page.post('/createuser', async (req,res)=>{
-    let user= req.body
-    let sault=10
-    console.log(user)
-    user.password= await bcrypt.hashSync(user.password,sault)
-    await createUser(user)
-   res.send('criado') 
-try{
-   const result= await createUser(user)
-    res.redirect('/login')
-}catch{
-    1
-}
-})
+
 module.exports = page

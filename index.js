@@ -12,7 +12,7 @@ const page = require('./route/pages');
 
 //server
 const server = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 
 //view engine 
 server.set(`view engine`, `ejs`);

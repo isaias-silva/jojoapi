@@ -128,3 +128,4 @@ yarn.lock
 .pnp.*
 #ALTERATION
 temp/*
+*.env
