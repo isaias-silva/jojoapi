@@ -34,4 +34,26 @@ async function create(obj){
 
 
 }
-module.exports = {consult,consultOne}
+async function deleteOne(id){
+    const Stands = mongoose.model('stands', standSchema, 'stands')
+    let data = await Stands.findById(id)
+    if (data != null) {
+        await Stands.deleteOne({ _id: id })
+        return true
+    } else {
+        return null
+    }
+
+}
+async function updateOne(id,obj){
+    const Stands = mongoose.model('stands', standSchema, 'stands')
+    let data = await Stands.findById(id)
+    if (data != null) {
+        await Stands.updateOne({ _id: id, },obj)
+        return true
+    } else {
+        return null
+    }
+
+}
+module.exports = {consult,consultOne,create,deleteOne,updateOne}

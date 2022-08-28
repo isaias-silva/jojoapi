@@ -6,13 +6,15 @@ const { mongoose } = require('../model/db');
 const standSchema = require('../model/standModel')
 const authentific = require('../src/authentific');
 const { consult, consultOne } = require('../model/stands');
+const { createUser } = require('../model/users');
+const bcrypt=require("bcrypt")
 
 let stands = null
-
 page.use(async (req, res, next) => {
     stands = await consult()
     next()
 })
+
 page.get('/', (req, res) => {
 
     res.render('index.ejs', { key: "home", acess: stands.length, linkapi: info.github })
@@ -79,5 +81,19 @@ page.post('/aut', (req, res) => {
             req.session.baned = true
         }
     })
+})
+page.post('/createuser', async (req,res)=>{
+    let user= req.body
+    let sault=10
+    console.log(user)
+    user.password= await bcrypt.hashSync(user.password,sault)
+    await createUser(user)
+   res.send('criado') 
+try{
+   const result= await createUser(user)
+    res.redirect('/login')
+}catch{
+    1
+}
 })
 module.exports = page

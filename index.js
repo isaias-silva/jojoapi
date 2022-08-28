@@ -30,10 +30,13 @@ server.use((req, res, next) => {
 })
 
 //session
-server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
 server.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
+server.use(bodyParser.json())
+
+
+server.use(session({ secret: 'adkaskfaokfoaskfoakf', resave: true, saveUninitialized: true }))
 
 server.use(express.static(__dirname + '/public'));
 

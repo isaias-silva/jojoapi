@@ -5,33 +5,23 @@ const info = require('../src/data/info.json')
 const bodyParser = require('body-parser');
 const standSchema = require('../model/standModel')
 const mongoose = require('../model/db');
-const { create } = require('../model/stands');
+const { create, deleteOne, consultOne, updateOne, consult } = require('../model/stands');
+const adminAcess = require('../middlewares/adminAcess');
+let dados = []
 
 
-const color = ['\u001b[31m',
-    '\u001b[34m',
-    '\u001b[0m',
-]
-
-route.set("views", path.join(__dirname, '../views'))
-route.set("view engine", "ejs")
 route.use(express.static(path.join(__dirname, '../public')));
 route.use(bodyParser.urlencoded({
     extended: true
 }));
 
-function checkclass(req, res, next) {
-    if (req.session.user.class != 'admin') {
-        res.status(401).send('permissão negada!')
-    } else {
-        next()
-    }
-}
-route.use('/del/:id', checkclass)
-route.use('/edit/:id', checkclass)
-route.use('/create', checkclass)
+route.use(async (req, res, next) => {
+    dados = await consult()
+    next()
+})
 
 route.get('/', (req, res) => {
+
     res.render('admin.ejs', { acess: dados.length, data: dados, func: '/admin/create', obj: {} })
 
 })
@@ -43,63 +33,46 @@ route.post('/create', async (req, res) => {
 
     try {
 
-       await create(obj)
+        const result = await create(obj)
+        if (!result) {
+            res.sendStatus(500)
+        }
         res.redirect('/admin')
     } catch (err) {
         res.sendStatus(501)
     }
 
-
-
-
 })
 //parei aqui
-route.get('/del/:id', async (req, res) => {
-   
-    const Stands = mongoose.model('stands', standSchema, 'stands')
-    let data = await Stands.findById(req.body.id)
-    if (data != null) {
-        await posts.deleteOne({ _id: req.body.id })
-        res.json({ msg: `deleted` })
-    } else {
-        res.json({ message: 'post já foi excluido' })
-    }
-
-
-
-})
-route.get('/edit/:id', (req, res) => {
-    let posi;
-    const data = dados
-    for (let i in data) {
-        if (data[i].id == req.params.id) {
-            posi = i
-            let msg = `${req.session.user.nick} editar ${data[i].name}`
-            console.log(msg)
-
-
+route.get('/del/:id',adminAcess ,async (req, res) => {
+    try {
+        const result = await deleteOne(req.params.id)
+        if (!result) {
+            res.sendStatus(500)
         }
+        res.redirect('/admin')
+    } catch {
+        res.sendStatus(501)
     }
-    res.render('admin.ejs', { acess: dados.length, data: dados, func: `/admin/save/${data[posi].id}`, obj: data[posi] })
+})
+route.get('/edit/:id', adminAcess ,async (req, res) => {
+    const data = await consultOne(req.params.id)
+    if (!data) {
+        res.sendStatus(501)
+    }
+    res.render('admin.ejs', { acess: dados.length, data: dados, func: `/admin/save/${data.id}`, obj: data })
 
 })
-route.post('/save/:id', (req, res) => {
-    const data = dados
+route.post('/save/:id',adminAcess ,async (req, res) => {
     const obj = req.body
-
-    for (let i in data) {
-        if (data[i].id == req.params.id) {
-            obj.id = data[i].id
-            data[i] = obj
-            let msg = `${req.session.user.nick} save ${data[i].name}`
-            console.log(color[1] + msg + color[2])
-
-            savedata()
-
-            res.redirect('/admin')
-        }
+    const result = await updateOne(req.params.id, obj)
+    if (!result) {
+        res.sendStatus(500)
     }
+    res.redirect('/admin')
+
 })
+
 route.get('/exit', (req, res) => {
     req.session.login = false
     req.session.user = undefined

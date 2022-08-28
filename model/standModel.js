@@ -1,5 +1,5 @@
 const mongoose = require('./db')
-    //schema de post
+    //schema de stand
 const standSchema = new mongoose.Schema({
     name: String,
     user: String,
