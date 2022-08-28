@@ -2,9 +2,8 @@ const express = require('express');
 const route = express();
 const path = require("path")
 const info = require('../src/data/info.json')
-const bodyParser = require('body-parser');
-const standSchema = require('../model/standModel')
-const mongoose = require('../model/db');
+const bodyParser = require('body-parser')
+
 const { create, deleteOne, consultOne, updateOne, consult } = require('../model/stands');
 const adminAcess = require('../middlewares/adminAcess');
 let dados = []

@@ -8,7 +8,7 @@ const mongoose = require('./db')
         data.map(x=>x.password="#############")
         return data
     } catch (err) {
-        console.log(`erro no mongo`)
+        console.log(err)
         return []
     }
 }

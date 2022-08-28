@@ -6,7 +6,7 @@ const { mongoose } = require('../model/db');
 const standSchema = require('../model/standModel')
 const authentific = require('../src/authentific');
 const { consult, consultOne } = require('../model/stands');
-const { createUser } = require('../model/users');
+
 const bcrypt=require("bcrypt")
 
 const dados= require('../src/data/dados.json')
@@ -52,7 +52,7 @@ page.get('/guide', async (req, res) => {
 
 
 page.get('/login', (req, res) => {
-
+    
     res.render('login-adm.ejs',{msg:''})
 
 })
