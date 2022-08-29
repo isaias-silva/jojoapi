@@ -32,8 +32,18 @@
 
 <h2>⚙️ examples ⚙️</h2>
 <div>
-   <iframe src="https://jojolist.netlify.app/" title="jojodex">
-   </iframe>
+   <ul>
+      <li>
+   <a href="https://jojolist.netlify.app/">
+     basic version 
+   </a>
+      </li>
+      <li>
+   <a href="https://jojo-list.netlify.app/">
+     React version 
+   </a>
+      </li>
+   </ul>
 </div>
 <h2>x & y in Canvas for atributes of hexagonal graph </h2>
 <table>
