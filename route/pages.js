@@ -7,15 +7,17 @@ const standSchema = require('../model/standModel')
 const authentific = require('../src/authentific');
 const { consult, consultOne } = require('../model/stands');
 
-const bcrypt=require("bcrypt")
+const bcrypt = require("bcrypt")
 
-const dados= require('../src/data/dados.json')
+const dados = require('../src/data/dados.json')
 let stands = null
-page.use(async (req, res, next) => {
+page.use(async(req, res, next) => {
     stands = await consult()
     next()
 })
-
+page.get('/home', (req, res) => {
+    res.redirect('/')
+})
 page.get('/', (req, res) => {
 
     res.render('index.ejs', { key: "home", acess: stands.length, linkapi: info.github })
@@ -31,13 +33,13 @@ page.get('/about', (req, res) => {
 page.get('/hexagraph', (req, res) => {
     res.render('index.ejs', { key: "hex", acess: stands.length })
 })
-page.get('/jojostands', async (req, res) => {
+page.get('/jojostands', async(req, res) => {
 
     res.json(stands)
 
 })
 
-page.get('/jojostands/stand/id/:id', async (req, res) => {
+page.get('/jojostands/stand/id/:id', async(req, res) => {
     if (!req.params.id) {
         return res.sendStatus(404)
     }
@@ -45,15 +47,15 @@ page.get('/jojostands/stand/id/:id', async (req, res) => {
     res.json(stand)
 })
 
-page.get('/guide', async (req, res) => {
+page.get('/guide', async(req, res) => {
 
     res.render('index.ejs', { key: "guide", acess: stands.length, data: stands })
 })
 
 
 page.get('/login', (req, res) => {
-    
-    res.render('login-adm.ejs',{msg:''})
+
+    res.render('login-adm.ejs', { msg: '' })
 
 })
 page.post('/aut', (req, res) => {
@@ -64,7 +66,7 @@ page.post('/aut', (req, res) => {
             res.redirect('/admin/')
         } else {
             req.session.baned = true
-            res.render('login-adm.ejs',{msg:'acesso negado!'})
+            res.render('login-adm.ejs', { msg: 'acesso negado!' })
         }
     })
 })

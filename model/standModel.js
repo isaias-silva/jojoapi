@@ -1,5 +1,5 @@
 const mongoose = require('./db')
-    //schema de stand
+    //schema de 
 const standSchema = new mongoose.Schema({
     name: String,
     user: String,

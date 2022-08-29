@@ -1,7 +1,6 @@
-
-  
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,32 +12,34 @@
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     <title>JOJO's API</title>
 </head>
-<body >
-    <div id="conteudo">
-  <%-include('./partials/header-banner.ejs')  %> 
-  <%if(key=="home") { %> 
-  <%-include('./partials/section.ejs')  %> 
- <% } %> 
- <%if(key=="how"){ %>
-    <%-include('./partials/howtouse.ejs')  %> 
-    
-    <% } %>  
-    <%if(key=="about"){ %>
-        <%-include('./partials/about.ejs')  %> 
-        
-        <% } %>  
-        <%if(key=="hex"){ %>
-            <%-include('./partials/hexagraph.ejs')  %> 
-            <script src="./graph.js"></script>
-            <% } %>  
-    
-    <%if(key=="guide") { %>
-        <%-include('./partials/guide.ejs')  %> 
-        <% } %>  
-  <%-include('./partials/footer.ejs')  %> 
-         
 
-</div>
+<body>
+    <div id="conteudo">
+        <%-include('./partials/header-banner.ejs')  %>
+            <%if(key=="home") { %>
+                <%-include('./partials/section.ejs')  %>
+                    <% } %>
+                        <%if(key=="how"){ %>
+                            <%-include('./partials/howtouse.ejs')  %>
+
+                                <% } %>
+                                    <%if(key=="about"){ %>
+                                        <%-include('./partials/about.ejs')  %>
+
+                                            <% } %>
+                                                <%if(key=="hex"){ %>
+                                                    <%-include('./partials/hexagraph.ejs')  %>
+                                                        <script src="./graph.js"></script>
+                                                        <% } %>
+
+                                                            <%if(key=="guide") { %>
+                                                                <%-include('./partials/guide.ejs')  %>
+                                                                    <% } %>
+                                                                        <%-include('./partials/footer.ejs')  %>
+
+
+    </div>
 
 </body>
+
 </html>

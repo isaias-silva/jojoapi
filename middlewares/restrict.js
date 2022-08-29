@@ -1,3 +1,4 @@
+//restrict
 module.exports = function restrict(req, res, next) {
     if (req.session.login == true) {
         if (!req.session.user) {
