@@ -29,6 +29,11 @@
     <li>stand color</li>
     <li>atributes of hexagonal graph</li>
 </ul>
+
+<h2>⚙️ examples ⚙️</h2>
+<div>
+   <iframe src="https://jojolist.netlify.app/?" title="jojodex"></iframe>
+</div>
 <h2>x & y in Canvas for atributes of hexagonal graph </h2>
 <table>
   <tr>
