@@ -169,12 +169,30 @@ pre,
     height: 200px;
 }
 
-.blockform input {
+.blockform input,
+.cancelbtn {
     display: block;
     margin: 10px;
     height: 20px;
     width: 100%;
     background-color: black;
+    border: 1px solid white;
+}
+
+.blockform input:hover,
+.cancelbtn:hover {
+    cursor: pointer;
+    color: rgb(243, 109, 255);
+    border-color: rgb(243, 109, 255);
+}
+
+.cancelbtn {
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
 }
 
 select {
@@ -297,12 +315,12 @@ article.hexagraph img {
     border-radius: 10px;
     overflow: hidden;
     border: white solid 1px;
-    transition: 0.5s ease-in-out;
+    transition: 0.1s ease-in-out;
+    box-sizing: border-box;
 }
 
 .std:hover {
-    transform: scale(0.9);
-    border-style: dashed;
+    transform: scale(1.2);
     cursor: pointer;
 }
 
@@ -335,7 +353,6 @@ article.hexagraph img {
 .std img {
     width: 170px;
     height: auto;
-    filter: opacity(0.5);
 }
 
 .std:hover img {

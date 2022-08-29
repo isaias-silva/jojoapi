@@ -2,7 +2,7 @@ const express = require('express');
 const route = express();
 const path = require("path")
 const info = require('../src/data/info.json')
-const bodyParser = require('body-parser')
+
 
 const { create, deleteOne, consultOne, updateOne, consult } = require('../model/stands');
 const adminAcess = require('../middlewares/adminAcess');
@@ -10,11 +10,8 @@ let dados = []
 
 
 route.use(express.static(path.join(__dirname, '../public')));
-route.use(bodyParser.urlencoded({
-    extended: true
-}));
 
-route.use(async (req, res, next) => {
+route.use(async(req, res, next) => {
     dados = await consult()
     next()
 })
@@ -25,25 +22,25 @@ route.get('/', (req, res) => {
 
 })
 
-route.post('/create', async (req, res) => {
-    let obj = req.body
-    obj.id = parseInt(Math.random() * 9999999)
+route.post('/create', async(req, res) => {
+        let obj = req.body
+        obj.id = parseInt(Math.random() * 9999999)
 
 
-    try {
+        try {
 
-        const result = await create(obj)
-        if (!result) {
-            res.sendStatus(500)
+            const result = await create(obj)
+            if (!result) {
+                res.sendStatus(500)
+            }
+            res.redirect('/admin')
+        } catch (err) {
+            res.sendStatus(501)
         }
-        res.redirect('/admin')
-    } catch (err) {
-        res.sendStatus(501)
-    }
 
-})
-//parei aqui
-route.get('/del/:id',adminAcess ,async (req, res) => {
+    })
+    //parei aqui
+route.get('/del/:id', adminAcess, async(req, res) => {
     try {
         const result = await deleteOne(req.params.id)
         if (!result) {
@@ -54,7 +51,7 @@ route.get('/del/:id',adminAcess ,async (req, res) => {
         res.sendStatus(501)
     }
 })
-route.get('/edit/:id', adminAcess ,async (req, res) => {
+route.get('/edit/:id', adminAcess, async(req, res) => {
     const data = await consultOne(req.params.id)
     if (!data) {
         res.sendStatus(501)
@@ -62,7 +59,7 @@ route.get('/edit/:id', adminAcess ,async (req, res) => {
     res.render('admin.ejs', { acess: dados.length, data: dados, func: `/admin/save/${data.id}`, obj: data })
 
 })
-route.post('/save/:id',adminAcess ,async (req, res) => {
+route.post('/save/:id', adminAcess, async(req, res) => {
     const obj = req.body
     const result = await updateOne(req.params.id, obj)
     if (!result) {
