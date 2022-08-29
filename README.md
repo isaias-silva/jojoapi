@@ -1,4 +1,5 @@
 # jojoapi
+
 <a href="https://jojo-api.herokuapp.com/" rel="noreferer" target="_blank">
 link of api
 </a>
@@ -7,7 +8,7 @@ link of api
 
 </div>
 <h2>⚙️ the api is in development ⚙️ </h2>
-<a href="https://jojo-api.herokuapp.com/">link of Api</a>
+
 <p>api returns data from jojo's bizarre adventures manga stands, the data returned in a json is:</p>
 <h2>usage</h2>
 <em>
