@@ -1,5 +1,6 @@
 # jojoapi
 <img src="https://vocesabianime.com/wp-content/uploads/2020/03/JoJos-Bizarre-Adventure-Jojo-Joestar-Johnny-Joestar-Jonathan-Joestar-1139449-wallhere.com_.jpg"/>
+<h2>⚙️ deploy⚙️</h2>
 <a href="https://jojo-api.herokuapp.com/" rel="noreferer" target="_blank">
    <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white">
 </a>
