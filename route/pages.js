@@ -65,8 +65,8 @@ page.post('/aut', (req, res) => {
             req.session.user = user
             res.redirect('/admin/')
         } else {
-            req.session.baned = true
-            res.render('login-adm.ejs', { msg: 'acesso negado!' })
+
+            res.render('login-adm.ejs', { msg: 'usuario não existe ou senha está incorreta!' })
         }
     })
 })

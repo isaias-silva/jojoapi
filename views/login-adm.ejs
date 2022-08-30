@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,23 +9,50 @@
     <link rel="stylesheet" href="/login.css">
     <title>login</title>
 </head>
-<body >    
-   <div id="teladelogin">
-   <h2>login</h2>
-   <form action="/aut" method="POST">
-     
-      <input type="text" name="nick" id="nickname"maxlength="20" placeholder="nick" required>
-        <input type="password" name="password" id="senh" maxlength="20" placeholder="senha" required>
-     <button>
+
+<body>
+    <div id="teladelogin">
+        <h2>login</h2>
+        <form action="/aut" method="POST">
+
+            <input type="text" name="nick" id="nickname" maxlength="20" placeholder="nick" required>
+            <input type="password" name="password" id="senh" maxlength="20" placeholder="senha" required>
+            <p align="center">qual a soma de <span>1</span> e <span>1</span> ?
+            </p>
+            <input type="number" name="answer" maxlength="7" id="sum">
+            <button>
         entrar
      </button>
-      </form>
-   </div>
+        </form>
+
+    </div>
     <script>
-        let msg= '<%=msg%>'
-        if(msg.length>1){
-         alert(msg)
+        let msg = '<%=msg%>'
+        if (msg.length > 1) {
+            alert(msg)
+        }
+        let n1;
+        let n2;
+
+        n1 = parseInt(Math.random() * 100)
+        n2 = parseInt(Math.random() * 100)
+        let span = document.querySelectorAll(`span`)
+        span[0].innerText = n1
+        span[1].innerText = n2
+        console.log(``)
+
+
+        let form = document.querySelector(`form`)
+        form.onsubmit = (ev) => {
+            let soma = parseInt(document.querySelector(`#sum`).value)
+
+
+            if (soma != n1 + n2) {
+                alert(`you are a machine?`)
+                ev.preventDefault();
+            }
         }
     </script>
-   </body>
-</html> 
+</body>
+
+</html>
