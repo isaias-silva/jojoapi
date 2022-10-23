@@ -5,7 +5,7 @@
    <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white">
 </a>
 <a href="https://jojoapi.up.railway.app/" rel="noreferer" target="_blank">
-   railway
+   <div stype="background: #000; color: #fff;">railway</div>
 </a>
 <h2>⚙️ stacks ⚙️</h2>
 <div style="display:flex">
