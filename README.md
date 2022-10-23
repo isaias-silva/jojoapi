@@ -4,6 +4,9 @@
 <a href="https://jojo-api.herokuapp.com/" rel="noreferer" target="_blank">
    <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white">
 </a>
+<a href="https://jojoapi.up.railway.app/" rel="noreferer" target="_blank">
+   railway
+</a>
 <h2>⚙️ stacks ⚙️</h2>
 <div style="display:flex">
 
