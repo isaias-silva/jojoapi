@@ -16,7 +16,7 @@
 </div>
 <h2>⚙️ the api is in development ⚙️ </h2>
 
-<p>api returns data from jojo's bizarre adventures manga stands, the data returned in a json is:</p>
+<p>api returns data from jojo's bizarre adventures manga stands</p>
 <h2>usage</h2>
 <em>
     const url = 'https://jojo-api.herokuapp.com/jojostands'
