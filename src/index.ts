@@ -7,6 +7,8 @@ import bodyParser from 'body-parser'
 import session from 'express-session'
 import { HttpError } from './utils/HttpError'
 import pageController from './controllers/page.controller'
+import extractDomain from './middlewares/extract.domain'
+import authController from './controllers/auth.controller'
 config()
 
 const port = process.env.PORT || 8080
@@ -26,9 +28,10 @@ app.use(session({ secret: process.env.SECRET || 'jojo', resave: true, saveUninit
 
 app.use(express.static('public'));
 
+app.use([extractDomain])
 
 app.use(pageController)
-
+app.use('/auth', authController)
 app.use((req: Request, res: Response, next: NextFunction) => {
     const erro = new HttpError(404, 'not found')
 
