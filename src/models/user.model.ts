@@ -1,7 +1,9 @@
 import { INTEGER, STRING } from "sequelize";
 import db from "../db";
+import { Iuser } from "../interfaces/interface.user";
 
 export default db.define('user', {
+   
     id: {
         type: INTEGER,
         autoIncrement: true,
