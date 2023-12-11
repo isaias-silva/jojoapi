@@ -29,6 +29,7 @@
     "mysql2": "^3.6.5",
     "pino": "^8.16.2",
     "pino-pretty": "^10.2.3",
-    "sequelize": "^6.35.1"
+    "sequelize": "^6.35.1",
+    "sequelize-typescript": "^2.1.6"
   }
 }
