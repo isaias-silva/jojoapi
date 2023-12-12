@@ -6,16 +6,26 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import { HttpError } from './utils/HttpError'
-import pageController from './controllers/page.controller'
+
 import extractDomain from './middlewares/extract.domain'
-import authController from './controllers/auth.controller'
+import { User } from './models/user.model'
+import { Controller } from './interfaces/interface.controller'
+import { AuthController } from './controllers/auth.controller'
+import { PagesController } from './controllers/page.controller'
+
 config()
+
+declare module 'express-session' {
+    interface SessionData {
+        user: { name: string, email: string };
+    }
+}
 
 
 export class App {
     private port: string | number
     private server?: Express
-
+    private controllers = [AuthController, PagesController]
     constructor(port: string | number) {
         this.port = port
     }
@@ -25,8 +35,8 @@ export class App {
         this.defineMiddlewares()
         this.defineRoutes()
         this.treatingErrors()
-        
-        this.server.listen(this.port,()=>{
+
+        this.server.listen(this.port, () => {
             logger.info(`server running in port ${this.port}`)
         })
     }
@@ -58,8 +68,12 @@ export class App {
         if (!this.server) {
             return
         }
-        this.server.use(pageController)
-        this.server.use('/auth', authController)
+        this.controllers.forEach((Controller) => {
+            const controller = new Controller()
+            this.server?.use(controller.path, controller.router)
+            logger.info(`controler ${controller.path}`)
+        })
+
     }
 
     private treatingErrors() {

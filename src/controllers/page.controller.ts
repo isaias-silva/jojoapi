@@ -1,43 +1,55 @@
 import { Router, Response, Request } from "express";
+import { Controller } from "../interfaces/interface.controller";
 
-const router = Router()
+export class PagesController implements Controller {
+    path = '/'
+    router: Router;
 
-router.get(['/home', '/'], (req: Request, res: Response) => {
+    constructor() {
+        this.router = Router();
+        this.defineRoutes();
+    }
 
-    res.render('index.ejs', { key: 'home', countStands: 0 })
-})
+    defineRoutes() {
 
-router.get('/howtouse', (req: Request, res: Response) => {
+        this.router.get(['/home', '/'], (req: Request, res: Response) => {
 
-    res.render('index.ejs', { key: "how", countStands: 0 })
-})
+            res.render('index.ejs', { key: 'home', countStands: 0 })
+        })
 
-router.get('/about', (req: Request, res: Response) => {
-    res.render('index.ejs', { key: "about", countStands: 0 })
-})
+        this.router.get('/howtouse', (req: Request, res: Response) => {
 
-router.get('/hexagraph', (req: Request, res: Response) => {
-    res.render('index.ejs', { key: "hex", countStands: 0 })
-})
+            res.render('index.ejs', { key: "how", countStands: 0 })
+        })
 
+        this.router.get('/about', (req: Request, res: Response) => {
+            res.render('index.ejs', { key: "about", countStands: 0 })
+        })
 
-router.get('/login', (req: Request, res: Response) => {
-
-    res.render('login-adm.ejs', { msg: '' })
-
-})
-
-router.get('/admin', (req, res) => {
-
-    res.render('admin.ejs', { countStands: 0, data:{} , func: '/admin/create', obj: {} })
-
-})
+        this.router.get('/hexagraph', (req: Request, res: Response) => {
+            res.render('index.ejs', { key: "hex", countStands: 0 })
+        })
 
 
-router.get('/edit/:id', async(req, res) => {
-   
-    res.render('admin.ejs', { countStands:0, data:{}, func: `/admin/save/`, obj:{} })
+        this.router.get('/login', (req: Request, res: Response) => {
 
-})
+            res.render('login-adm.ejs', { msg: '' })
 
-export default router
+        })
+
+        this.router.get('/admin', (req, res) => {
+
+            res.render('admin.ejs', { countStands: 0, data: {}, func: '/admin/create', obj: {} })
+
+        })
+
+
+        this.router.get('/edit/:id', async (req, res) => {
+
+            res.render('admin.ejs', { countStands: 0, data: {}, func: `/admin/save/`, obj: {} })
+
+        })
+
+
+    }
+}
