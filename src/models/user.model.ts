@@ -1,26 +1,27 @@
 import { INTEGER, STRING } from "sequelize";
-import db from "../db";
+
 import { Iuser } from "../interfaces/interface.user";
+import { Column, Model, Table } from "sequelize-typescript";
 
-export default db.define('user', {
-   
-    id: {
-        type: INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
-
-    },
-    name: {
-        type: STRING,
-        allowNull: false
-    },
-    email:{
-        type:STRING,
-        allowNull: false
-    },
-    password:{
-        type:STRING,
-        allowNull: false
-    }
-})
+@Table({
+    tableName: 'users',
+  })
+  export class User extends Model<Iuser> {
+    @Column({
+      type: STRING,
+      allowNull: false,
+    })
+    name!: string;
+  
+    @Column({
+      type:STRING,
+      allowNull: false,
+    })
+    email!: string;
+  
+    @Column({
+      type: STRING,
+      allowNull: false,
+    })
+    password!: string;
+  }

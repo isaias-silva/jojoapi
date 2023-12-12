@@ -25,6 +25,7 @@ export class App {
         this.defineMiddlewares()
         this.defineRoutes()
         this.treatingErrors()
+        
         this.server.listen(this.port,()=>{
             logger.info(`server running in port ${this.port}`)
         })
