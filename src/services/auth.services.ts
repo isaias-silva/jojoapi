@@ -9,37 +9,36 @@ export class AuthService {
     private userModel = User
 
     loginInSession = async (user: Iuser): Promise<{ name: string, email: string }> => {
+        logger.info('login starting...')
 
-        try {
-            const { email, password } = user
-            await db.sync()
-            const userDb = await this.userModel.findOne({
-                where: {
-                    email
-                }
-            })
-            if (!userDb) {
-                throw new HttpError(404, 'user not found')
-            }
-            const valid = await bcrypt.compare(password, userDb.password)
-            if (!valid) {
-                throw new HttpError(401, 'incorrect password')
-            }
-
-            const { name } = userDb
-
-            return {
-                name,
+        const { email, password } = user
+        if(!email||!password){
+            throw new HttpError(400, 'info required')   
+        }
+        await db.sync()
+        const userDb = await this.userModel.findOne({
+            where: {
                 email
             }
+        })
+        if (!userDb) {
+            throw new HttpError(404, 'user not found')
         }
-        catch (err: HttpError | unknown) {
+        const valid = await bcrypt.compare(password, userDb.password)
+        if (!valid) {
             throw new HttpError(401, 'incorrect password')
-           
-
         }
 
+        const { name } = userDb
+
+        return {
+            name,
+            email
+        }
     }
+
+
+
 
 }
 

@@ -3,7 +3,7 @@ import { Controller } from "../interfaces/interface.controller";
 import { UserService } from "../services/user.service";
 
 export class UserController implements Controller {
-    path: string = 'user';
+    path: string = '/user';
     router: Router = Router();
     private userServices: UserService
 

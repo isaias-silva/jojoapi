@@ -2,10 +2,11 @@ import { Request, Response, Router } from "express";
 import { Controller } from "../interfaces/interface.controller";
 import { AuthService } from "../services/auth.services";
 import { Iuser } from "../interfaces/interface.user";
+import { HttpError } from "../utils/HttpError";
 
 
 export class AuthController implements Controller {
-    path = 'auth'
+    path = '/auth'
     router: Router
     private authService: AuthService
     constructor() {
@@ -16,13 +17,20 @@ export class AuthController implements Controller {
     }
 
     defineRoutes() {
-        this.router.post(['/', 'login'], async (req: Request, res: Response) => {
+
+        this.router.post('/', async (req: Request, res: Response) => {
             const body: Iuser = req.body
-            const session = await this.authService.loginInSession(body)
+            try {
+                const session = await this.authService.loginInSession(body)
 
-            req.session.user = session
+                req.session.user = session
 
-            return { message: 'login is a sucess' }
+                res.send({ message: 'login is a sucess' })
+
+            } catch (err: any) {
+
+                res.status(err.status || 500).json({ message: err.message || 'internal' })
+            }
         })
 
     }

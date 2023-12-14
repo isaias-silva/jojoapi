@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: dockerfile
     ports:
-      - "8080:8080"
+      - "4000:8080"
 
     networks:
       - madeinheaven.network

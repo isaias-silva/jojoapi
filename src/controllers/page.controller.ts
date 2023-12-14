@@ -2,7 +2,7 @@ import { Router, Response, Request } from "express";
 import { Controller } from "../interfaces/interface.controller";
 
 export class PagesController implements Controller {
-    path = '/'
+    path = ''
     router: Router;
 
     constructor() {

@@ -1,11 +1,16 @@
 import { config } from "dotenv";
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize-typescript";
+import { User } from "./models/user.model";
 config()
 
-export default new Sequelize('jojodb',
-'root',
+const db = new Sequelize('jojodb',
+    'root',
     process.env.DB_PASSWORD,
     {
         dialect: 'mysql',
-        host: `mysql://root:${process.env.DB_PASSWORD}@jojodata:3306/jojodb`
+        host: `jojodata`
     })
+
+    db.addModels([User])
+    db.sync()
+export default db

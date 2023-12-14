@@ -1,12 +1,14 @@
 import { User } from "../models/user.model";
 import * as bcrypt from 'bcrypt'
 import logger from "../utils/logger";
+import db from "../db";
 export class UserService {
     private userModel = User
 
     async generateUser() {
 
         try {
+            await db.sync()
             const userExist = await this.userModel.findOne({ where: { email: process.env.ADM_MAIL } })
             if (userExist) {
                 return { message: 'user exist' }

@@ -12,6 +12,8 @@ import { User } from './models/user.model'
 import { Controller } from './interfaces/interface.controller'
 import { AuthController } from './controllers/auth.controller'
 import { PagesController } from './controllers/page.controller'
+import { UserController } from './controllers/user.controller'
+import listEndpoints from 'express-list-endpoints'
 
 config()
 
@@ -25,7 +27,7 @@ declare module 'express-session' {
 export class App {
     private port: string | number
     private server?: Express
-    private controllers = [AuthController, PagesController]
+    private controllers = [AuthController, PagesController,UserController]
     constructor(port: string | number) {
         this.port = port
     }
@@ -56,6 +58,8 @@ export class App {
         this.server.use(session({ secret: process.env.SECRET || 'jojo', resave: true, saveUninitialized: true }))
 
         this.server.use(express.static('public'));
+        
+      
     }
 
     private defineMiddlewares() {
@@ -74,18 +78,22 @@ export class App {
                 controller.afterCreate()
             }
             this.server?.use(controller.path, controller.router)
-            logger.info(`controler => /${controller.path}`)
+            logger.info(`controler => ${controller.path}`)
         })
-
+        logger.warn(listEndpoints(this.server));
     }
 
     private treatingErrors() {
         if (!this.server) {
             return
         }
-        this.server.use((req: Request, res: Response, next: NextFunction) => {
-            const error = new HttpError(404, 'not found')
 
+        this.server.use((err:HttpError,req: Request, res: Response, next: NextFunction) => {
+            let error:HttpError=err
+            if(!err){
+
+                error = new HttpError(404, 'not found')
+           }
             next(error);
         })
 
