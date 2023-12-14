@@ -69,9 +69,12 @@ export class App {
             return
         }
         this.controllers.forEach((Controller) => {
-            const controller = new Controller()
+            const controller: Controller = new Controller()
+            if (controller.afterCreate) {
+                controller.afterCreate()
+            }
             this.server?.use(controller.path, controller.router)
-            logger.info(`controler ${controller.path}`)
+            logger.info(`controler => /${controller.path}`)
         })
 
     }
@@ -98,8 +101,6 @@ export class App {
     }
 }
 
-const port = process.env.PORT || 8080
-const app = express()
 
 
 
