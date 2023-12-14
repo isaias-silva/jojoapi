@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { Controller } from "../interfaces/interface.controller";
 import { UserService } from "../services/user.service";
 
@@ -13,7 +13,10 @@ export class UserController implements Controller {
         this.userServices = new UserService()
     }
     defineRoutes = () => {
+        this.router.get('/sessionInfo',async (req: Request, res:Response) => {
 
+            res.json({sessionInfo:req.session.user})
+        })
 
     }
     afterCreate = () => {

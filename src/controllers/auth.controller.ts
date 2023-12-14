@@ -33,6 +33,10 @@ export class AuthController implements Controller {
             }
         })
 
+        this.router.post('/logout', (req: Request, res: Response) => {
+            req.session.user = undefined
+            res.status(200).json({ message: 'bye bye!' })
+        })
     }
 }
 

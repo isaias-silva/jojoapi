@@ -27,7 +27,7 @@ declare module 'express-session' {
 export class App {
     private port: string | number
     private server?: Express
-    private controllers = [AuthController, PagesController,UserController]
+    private controllers = [AuthController, PagesController, UserController]
     constructor(port: string | number) {
         this.port = port
     }
@@ -58,8 +58,8 @@ export class App {
         this.server.use(session({ secret: process.env.SECRET || 'jojo', resave: true, saveUninitialized: true }))
 
         this.server.use(express.static('public'));
-        
-      
+
+
     }
 
     private defineMiddlewares() {
@@ -88,18 +88,10 @@ export class App {
             return
         }
 
-        this.server.use((err:HttpError,req: Request, res: Response, next: NextFunction) => {
-            let error:HttpError=err
-            if(!err){
-
-                error = new HttpError(404, 'not found')
-           }
-            next(error);
-        })
-
-        this.server.use((erro: HttpError, req: Request, res: Response, next: NextFunction) => {
-            logger.error(erro)
-            return res.render('erro.ejs', { erro: erro.status, msg: erro })
+    
+        this.server.use((req: Request, res: Response, next: NextFunction) => {
+         
+            return res.render('erro.ejs', { erro: 404, msg:'not found' })
 
         }
         )
