@@ -14,20 +14,20 @@ export class PagesController implements Controller {
 
         this.router.get(['/home', '/'], (req: Request, res: Response) => {
 
-            res.render('index.ejs', { key: 'home', countStands: 0 })
+            res.render('index.ejs', { key: 'home'})
         })
 
         this.router.get('/howtouse', (req: Request, res: Response) => {
 
-            res.render('index.ejs', { key: "how", countStands: 0 })
+            res.render('index.ejs', { key: "how"})
         })
 
         this.router.get('/about', (req: Request, res: Response) => {
-            res.render('index.ejs', { key: "about", countStands: 0 })
+            res.render('index.ejs', { key: "about"})
         })
 
         this.router.get('/hexagraph', (req: Request, res: Response) => {
-            res.render('index.ejs', { key: "hex", countStands: 0 })
+            res.render('index.ejs', { key: "hex"})
         })
 
 
@@ -39,7 +39,7 @@ export class PagesController implements Controller {
 
         this.router.get('/admin', (req, res) => {
 
-            res.render('admin.ejs', { countStands: 0, data: {}, func: '/admin/create', obj: {} })
+            res.render('admin.ejs', {})
 
         })
 

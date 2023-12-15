@@ -14,7 +14,14 @@ export class UserService {
                 return { message: 'user exist' }
             }
             const password = bcrypt.hashSync(process.env.ADM_PASS || 'root', 10)
-            await this.userModel.create({ email: process.env.ADM_MAIL || 'adm@admin', name: process.env.NAME || 'adm', password })
+          
+            await this.userModel.create({
+                email: process.env.ADM_MAIL || 'adm@admin',
+                name: process.env.NAME || 'adm',
+                password,
+                type: 'admin'
+            })
+
             logger.info('user generate')
         } catch (err) {
             logger.error(err)

@@ -80,7 +80,7 @@ export class App {
             this.server?.use(controller.path, controller.router)
             logger.info(`controler => ${controller.path}`)
         })
-        logger.warn(listEndpoints(this.server));
+        console.table(listEndpoints(this.server));
     }
 
     private treatingErrors() {
@@ -91,7 +91,7 @@ export class App {
     
         this.server.use((req: Request, res: Response, next: NextFunction) => {
          
-            return res.render('erro.ejs', { erro: 404, msg:'not found' })
+            return res.render('error.ejs', { status: 404, msg:'not found' })
 
         }
         )

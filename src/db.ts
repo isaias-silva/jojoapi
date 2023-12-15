@@ -11,6 +11,6 @@ const db = new Sequelize('jojodb',
         host: `jojodata`
     })
 
-    db.addModels([User])
-    db.sync()
+db.addModels([User])
+
 export default db

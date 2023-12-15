@@ -8,12 +8,13 @@ import logger from "../utils/logger";
 export class AuthService {
     private userModel = User
 
-    loginInSession = async (user: Iuser): Promise<{ name: string, email: string }> => {
+    loginInSession = async (user: Iuser): Promise<{ name: string, email: string, type: 'user' | 'admin' }> => {
         logger.info('login starting...')
 
         const { email, password } = user
-        if(!email||!password){
-            throw new HttpError(400, 'info required')   
+        console.log(user)
+        if (!email || !password) {
+            throw new HttpError(400, `info ${!email ? 'EMAIL' : 'PASSWORD'} required`)
         }
         await db.sync()
         const userDb = await this.userModel.findOne({
@@ -29,11 +30,12 @@ export class AuthService {
             throw new HttpError(401, 'incorrect password')
         }
 
-        const { name } = userDb
+        const { name, type } = userDb
 
         return {
             name,
-            email
+            email,
+            type
         }
     }
 

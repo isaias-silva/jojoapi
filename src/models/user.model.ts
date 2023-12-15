@@ -1,4 +1,4 @@
-import { INTEGER, STRING } from "sequelize";
+import { INTEGER, STRING} from "sequelize";
 
 import { Iuser } from "../interfaces/interface.user";
 import { Column, Model, Table } from "sequelize-typescript";
@@ -25,5 +25,12 @@ export class User extends Model<Iuser> {
     allowNull: false,
   })
   password!: string;
+
+  @Column({
+    type: STRING,
+    allowNull: true,
+    defaultValue: 'user'
+  })
+  type!: 'user' | 'admin';
 }
 

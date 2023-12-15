@@ -25,11 +25,11 @@ export class AuthController implements Controller {
 
                 req.session.user = session
 
-                res.send({ message: 'login is a sucess' })
+                res.render('admin.ejs',{data:[]})
 
             } catch (err: any) {
 
-                res.status(err.status || 500).json({ message: err.message || 'internal' })
+                res.status(err.status || 500).render('error.ejs', { status: err.status || 500, msg: err.message || 'internal' })
             }
         })
 
