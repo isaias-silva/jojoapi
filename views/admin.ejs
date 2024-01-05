@@ -7,14 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-   
+
     <title>JOJO's API</title>
 </head>
 
 <body>
     <div id="conteudo">
 
-        <%-include('./partials/header-banner.ejs')  %>
-       
+        <%-include('./partials/header-banner.ejs') %>
+
+            <section>
+                <article class="aviso">
+                    ⭐ wellcome <%=session?.name || 'name' %>⭐
+
+                </article>
+                <article class="userinfo">
+                    <div class="block-info">
+                        <h3>
+                            <%=session?.name || 'name' %>
+                        </h3>
+
+                        <p>
+                            <%=session?.email || 'email' %>
+                        </p>
+                      
+                    </div>
+
+<div class="block-control">
+<ul>
+    <li><a href="">stands</a></li>
+    <li><a href="">users</a></li>
+    <li><a href="">exit</a></li>
+</ul>
+</div>
+
+
+
+
+
+                </article>
+            </section>
     </div>
+
 </body>

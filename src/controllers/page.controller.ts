@@ -1,5 +1,6 @@
 import { Router, Response, Request } from "express";
 import { Controller } from "../interfaces/interface.controller";
+import isLoging from "../middlewares/is.loging";
 
 export class PagesController implements Controller {
     path = ''
@@ -14,20 +15,20 @@ export class PagesController implements Controller {
 
         this.router.get(['/home', '/'], (req: Request, res: Response) => {
 
-            res.render('index.ejs', { key: 'home'})
+            res.render('index.ejs', { key: 'home' })
         })
 
         this.router.get('/howtouse', (req: Request, res: Response) => {
 
-            res.render('index.ejs', { key: "how"})
+            res.render('index.ejs', { key: "how" })
         })
 
         this.router.get('/about', (req: Request, res: Response) => {
-            res.render('index.ejs', { key: "about"})
+            res.render('index.ejs', { key: "about" })
         })
 
         this.router.get('/hexagraph', (req: Request, res: Response) => {
-            res.render('index.ejs', { key: "hex"})
+            res.render('index.ejs', { key: "hex" })
         })
 
 
@@ -39,14 +40,7 @@ export class PagesController implements Controller {
 
         this.router.get('/admin', (req, res) => {
 
-            res.render('admin.ejs', {})
-
-        })
-
-
-        this.router.get('/edit/:id', async (req, res) => {
-
-            res.render('admin.ejs', { countStands: 0, data: {}, func: `/admin/save/`, obj: {} })
+            res.render('admin.ejs', { session: req.session.user })
 
         })
 

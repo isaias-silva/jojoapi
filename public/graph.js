@@ -14,14 +14,11 @@ let power = document.getElementById('power').value.split(",").map((x)=>{return p
 ctx.clearRect(0, 0, graf.width, graf.height);
 ctx.fillStyle = document.querySelector("#color").value
 ctx.beginPath();
-
+ctx.strokeStyle = "white";
 //potencial
 
 
  ctx.lineTo(p[0],p[1]);
-
-
-
 
 ctx.lineTo(pr[0], pr[1]);
 //precision

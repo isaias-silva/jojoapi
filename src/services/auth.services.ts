@@ -8,11 +8,11 @@ import logger from "../utils/logger";
 export class AuthService {
     private userModel = User
 
-    loginInSession = async (user: Iuser): Promise<{ name: string, email: string, type: 'user' | 'admin' }> => {
+    loginInSession = async (user: Iuser): Promise<{ name: string, email: string, type: 'user' | 'admin', id: string }> => {
         logger.info('login starting...')
 
         const { email, password } = user
-        console.log(user)
+    
         if (!email || !password) {
             throw new HttpError(400, `info ${!email ? 'EMAIL' : 'PASSWORD'} required`)
         }
@@ -30,12 +30,12 @@ export class AuthService {
             throw new HttpError(401, 'incorrect password')
         }
 
-        const { name, type } = userDb
+        const { name, type, id } = userDb
 
         return {
             name,
             email,
-            type
+            type, id
         }
     }
 

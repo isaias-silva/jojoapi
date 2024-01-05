@@ -255,6 +255,8 @@ select {
     text-align: center;
 }
 
+
+
 #standsblocks {
     display: flex;
     flex-wrap: wrap;
@@ -439,6 +441,24 @@ footer {
     color: rgb(132, 0, 255);
     font-size: 16px;
 }
+.userinfo{
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+ 
+}
+.block-info, .block-control {
+    background-color: rgba(0, 0, 0, 0.174);
+    width: 40%;
+    height: 150px; /* Ajustado a altura para 150px, sinta-se livre para alterar conforme necessário */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
 
 @media screen and (max-width:600px) {
     #standguide {

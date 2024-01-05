@@ -8,11 +8,14 @@ export class UserService {
     async generateUser() {
 
         try {
-            await db.sync()
-            const userExist = await this.userModel.findOne({ where: { email: process.env.ADM_MAIL } })
+            await db.sync();
+           logger.info('db sync')
+           
+           const userExist = await this.userModel.findOne({ where: { email: process.env.ADM_MAIL } })
             if (userExist) {
                 return { message: 'user exist' }
             }
+
             const password = bcrypt.hashSync(process.env.ADM_PASS || 'root', 10)
           
             await this.userModel.create({
@@ -24,7 +27,7 @@ export class UserService {
 
             logger.info('user generate')
         } catch (err) {
-            logger.error(err)
+            logger.error('Error [user service] '+err)
         }
     }
 }

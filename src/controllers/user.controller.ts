@@ -19,8 +19,8 @@ export class UserController implements Controller {
         })
 
     }
-    afterCreate = () => {
-        this.userServices.generateUser()
+    afterCreate = async () => {
+        await this.userServices.generateUser()
     }
 
 }

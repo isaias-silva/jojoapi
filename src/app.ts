@@ -19,7 +19,7 @@ config()
 
 declare module 'express-session' {
     interface SessionData {
-        user: { name: string, email: string };
+        user: { name: string, email: string, id:string};
     }
 }
 
@@ -28,6 +28,7 @@ export class App {
     private port: string | number
     private server?: Express
     private controllers = [AuthController, PagesController, UserController]
+
     constructor(port: string | number) {
         this.port = port
     }
@@ -39,6 +40,14 @@ export class App {
         this.treatingErrors()
 
         this.server.listen(this.port, () => {
+
+            this.controllers.map(Controller=>{
+                const controller:Controller=new Controller();
+                
+                if (controller.afterCreate) {
+                    controller.afterCreate()
+                }
+            })
             logger.info(`server running in port ${this.port}`)
         })
     }
@@ -74,12 +83,12 @@ export class App {
         }
         this.controllers.forEach((Controller) => {
             const controller: Controller = new Controller()
-            if (controller.afterCreate) {
-                controller.afterCreate()
-            }
+        
             this.server?.use(controller.path, controller.router)
             logger.info(`controler => ${controller.path}`)
         })
+
+
         console.table(listEndpoints(this.server));
     }
 
@@ -88,10 +97,21 @@ export class App {
             return
         }
 
-    
-        this.server.use((req: Request, res: Response, next: NextFunction) => {
+        this.server.use((error:HttpError,req: Request, res: Response, next: NextFunction) => {
+           
+            if (error) {
+               
+              logger.info(error)
+            return res.render('error.ejs', { status: error.status, msg:error.message })
+
+            }
          
-            return res.render('error.ejs', { status: 404, msg:'not found' })
+                next()
+            
+        })
+        this.server.use((req: Request, res: Response, next: NextFunction) => {
+
+            return res.render('error.ejs', { status: 404, msg: 'not found' })
 
         }
         )
