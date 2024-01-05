@@ -7,28 +7,28 @@
         <h2>guide</h2>
         <p>the stands have the attributes:
             <ul>
-                <li>name:name of stand</li>
-                <li>user:user of stand</li>
-                <li>description:description of powers</li>
-                <li>image: image of stand</li>
-                <li>color:color for the background of stand</li>
-                <li>stats:(for the graph)</li>
+                <li><b>name:</b> name of stand</li>
+                <li><b>user:</b>user of stand</li>
+                <li><b>description:</b> description of powers</li>
+                <li><b>image:</b> image of stand</li>
+                <li><b>color:</b> color for the background of stand</li>
+                <li><b>stats:</b> (for the graph)</li>
             </ul>
         </p>
         <p>the API is constantly adjusting the lists of stands that are already in it:</p>
         <div id="standsguide">
-            <%for(let i in data)  {%>
+            <%for (let i in data)  {%>
 
-                <a href="/jojostands/stand/id/<%=data[i].id %>" target="_blank" class="std" style="border-color: '<%=${data[i].color}%>';"  >
+                <a href="/jojostands/stand/id/<%=data[i]?.id || ''%>" target="_blank" class="std"   >
                 
-                    <ul style="background-image:linear-gradient(black,'<%=data[i].color;%>')" >
-                    <li><%=data[i].name  %> </li>
-                    <li>id: <%=data[i].id%></li> 
+                    <ul style="background-image:linear-gradient(black,'<%=data[i]?.color || ''%>;')" >
+                    <li><%=data[i]?.name  %> </li>
+                    <li>id: <%=data[i]?.id%></li> 
                     <li>number: <%=i%></li> 
               
                  
                 </ul>
-                <img src=<%=data[i].img  %>  alt="stando">
+                <img src=<%=data[i]?.img  || ''  %>  alt="stando">
              
              
             </a>

@@ -92,14 +92,14 @@ header {
 aside {
     background: rgba(0, 0, 0, 0.857);
     position: absolute;
-   
+
     left: 0;
 
     text-align: center;
     height: 100%;
-  
+
     width: 15%;
-    
+
     box-sizing: border-box;
     overflow: hidden;
     z-index: 99998 !important;
@@ -441,21 +441,65 @@ footer {
     color: rgb(132, 0, 255);
     font-size: 16px;
 }
-.userinfo{
-    width: 100%;
-    margin-left: 10px;
+
+.userinfo {
+
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
- 
+
 }
+
 .block-info, .block-control {
     background-color: rgba(0, 0, 0, 0.174);
     width: 40%;
-    height: 150px; /* Ajustado a altura para 150px, sinta-se livre para alterar conforme necessário */
+    height: 150px;
     display: flex;
     flex-direction: column;
     padding: 10px;
     border-radius: 10px;
+    align-items: center;
+    border: 1px solid pink;
+}
+
+.block-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+.block-control {
+    width: 40%;
+    border: none;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.block-control ul li {
+    display: inline;
+}
+
+.block-control a {
+    background-color: rgb(219, 100, 255);
+    font-size: 18px;
+    text-align: center;
+    padding: 4px;
+    margin: 2px;
+    transition: 0.3s linear;
+    border-radius: 20px;
+
+}
+
+.block-control a:hover {
+    background-color: rgb(85, 2, 110);
+
+    cursor: pointer;
+
+
+
 }
 
 

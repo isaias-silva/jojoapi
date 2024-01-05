@@ -17,6 +17,7 @@ export class UserController implements Controller {
 
             res.json({sessionInfo:req.session.user})
         })
+      
 
     }
     afterCreate = async () => {

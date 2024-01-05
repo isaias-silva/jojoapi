@@ -25,7 +25,7 @@ export class AuthController implements Controller {
 
                 req.session.user = session
 
-                res.render('admin.ejs',{data:[]})
+                res.render('admin.ejs', { session, data: [] })
 
             } catch (err: any) {
 
@@ -33,9 +33,9 @@ export class AuthController implements Controller {
             }
         })
 
-        this.router.post('/logout', (req: Request, res: Response) => {
+        this.router.get('/logout', (req: Request, res: Response) => {
             req.session.user = undefined
-            res.status(200).json({ message: 'bye bye!' })
+            res.redirect('/')
         })
     }
 }

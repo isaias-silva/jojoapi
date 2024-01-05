@@ -31,6 +31,7 @@ export class PagesController implements Controller {
             res.render('index.ejs', { key: "hex" })
         })
 
+    
 
         this.router.get('/login', (req: Request, res: Response) => {
 
@@ -38,7 +39,7 @@ export class PagesController implements Controller {
 
         })
 
-        this.router.get('/admin', (req, res) => {
+        this.router.get('/admin',isLoging ,(req, res) => {
 
             res.render('admin.ejs', { session: req.session.user })
 

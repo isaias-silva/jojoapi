@@ -14,6 +14,7 @@ import { AuthController } from './controllers/auth.controller'
 import { PagesController } from './controllers/page.controller'
 import { UserController } from './controllers/user.controller'
 import listEndpoints from 'express-list-endpoints'
+import { StandController } from './controllers/stand.controller'
 
 config()
 
@@ -27,7 +28,7 @@ declare module 'express-session' {
 export class App {
     private port: string | number
     private server?: Express
-    private controllers = [AuthController, PagesController, UserController]
+    private controllers = [AuthController, PagesController, UserController,StandController]
 
     constructor(port: string | number) {
         this.port = port

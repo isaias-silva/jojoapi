@@ -23,6 +23,7 @@
                 </article>
                 <article class="userinfo">
                     <div class="block-info">
+                        <img src="img/generic.jpg" alt="">
                         <h3>
                             <%=session?.name || 'name' %>
                         </h3>
@@ -30,17 +31,18 @@
                         <p>
                             <%=session?.email || 'email' %>
                         </p>
-                      
+
                     </div>
 
-<div class="block-control">
-<ul>
-    <li><a href="">stands</a></li>
-    <li><a href="">users</a></li>
-    <li><a href="">exit</a></li>
-</ul>
-</div>
+                    <div class="block-control">
+                        <ul>
+                            <li><a href="/stands/admin">stands </a></li>
 
+                            <li><a href="">users</a></li>
+
+                            <li><a href="auth/logout">exit</a></li>
+                        </ul>
+                    </div>
 
 
 
