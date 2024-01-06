@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "./models/user.model";
+import { Stand } from "./models/stand.model";
 config()
 
 const db = new Sequelize('jojodb',
@@ -11,6 +12,6 @@ const db = new Sequelize('jojodb',
         host: `jojodata`
     })
 
-db.addModels([User])
-
+db.addModels([User, Stand])
+db.sync()
 export default db

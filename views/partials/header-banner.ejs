@@ -8,6 +8,9 @@
             <li><a href="/">home</a></li>
             <li><a href="/about">about</a></li>
             <li><a href="/howtouse">how to use</a></li>
+            <%if(!session) { %>
+                <li><a href="/login">login</a></li>
+                <% } %>
         </ul>
     </div>
 </header>
@@ -19,6 +22,9 @@
 </div>
 <aside>
     <ul>
+        <%if(session) { %>
+            <li><a href="/admin">adm</a></li>
+            <% } %>
         <li><a href="/stands/guide">stands guide</a></li>
         <li><a href="/hexagraph">hexagonal graph</a></li>
         <li><a href="/about">about</a></li>

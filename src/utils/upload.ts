@@ -2,9 +2,8 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
     filename: (req, file, cb) => {
-        const [name, mime] = file.originalname.split('.')
-        console.log(name)
-        cb(null, `${name}.${mime}`)
+
+        cb(null, req.body.name)
     },
     destination: (req, file, cb) => {
         cb(null, 'uploads/')

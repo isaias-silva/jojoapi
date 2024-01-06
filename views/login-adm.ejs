@@ -17,9 +17,9 @@
 
             <input type="text" name="email" maxlength="100" placeholder="email" required>
             <input type="password" name="password" maxlength="100" placeholder="senha" required>
-            <p align="center">qual a soma de <span>1</span> e <span>1</span> ?
+        
             </p>
-            <input type="number" name="answer" maxlength="7" id="sum">
+       
             <button>
         entrar
      </button>
@@ -27,31 +27,7 @@
 
     </div>
     <script>
-        let msg = '<%=msg%>'
-        if (msg.length > 1) {
-            alert(msg)
-        }
-        let n1;
-        let n2;
-
-        n1 = parseInt(Math.random() * 1000)
-        n2 = parseInt(Math.random() * 1000)
-        let span = document.querySelectorAll(`span`)
-        span[0].innerText = n1
-        span[1].innerText = n2
-        console.log(``)
-
-
-        let form = document.querySelector(`form`)
-        form.onsubmit = (ev) => {
-            let soma = parseInt(document.querySelector(`#sum`).value)
-
-
-            if (soma != n1 + n2) {
-                alert(`you are a machine?`)
-                ev.preventDefault();
-            }
-        }
+  
     </script>
 </body>
 

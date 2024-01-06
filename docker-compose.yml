@@ -12,9 +12,11 @@ services:
       MYSQL_DATABASE: jojodb
     volumes:
       - ./mysql:/var/lib/mysql
+   
     networks:
       - madeinheaven.network
 
+ 
   jojo-api:
     restart: always
     build:
@@ -28,6 +30,9 @@ services:
 
     depends_on:
       - jojo-mysql
+    volumes:
+      - ./temp:/app/public/assets/
+      
 
 networks:
   madeinheaven.network:

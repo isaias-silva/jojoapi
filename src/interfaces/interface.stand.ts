@@ -9,6 +9,6 @@ export interface Istand {
     durability: string;
     precision: string;
     potential: string;
-    img: Buffer;
+    img: string;
     color: string;
 }
