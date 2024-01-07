@@ -15,6 +15,7 @@ import { PagesController } from './controllers/page.controller'
 import { UserController } from './controllers/user.controller'
 import listEndpoints from 'express-list-endpoints'
 import { StandController } from './controllers/stand.controller'
+import db from './db'
 
 config()
 
@@ -37,6 +38,7 @@ export class App {
         this.server = express()
         this.defineConfigServer()
         this.defineMiddlewares()
+        //db.sync()
         this.defineRoutes()
         this.treatingErrors()
 
