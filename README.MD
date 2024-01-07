@@ -1,25 +1,56 @@
 # jojoapi
 <img src="https://vocesabianime.com/wp-content/uploads/2020/03/JoJos-Bizarre-Adventure-Jojo-Joestar-Johnny-Joestar-Jonathan-Joestar-1139449-wallhere.com_.jpg"/>
-<h2>⚙️ deploy⚙️</h2>
 
-<a href="https://jojoapi.up.railway.app/" rel="noreferer" target="_blank">
-   <div>
-   <img src="https://img.shields.io/static/v1?label=rail&message=way&color=black">
-   </div>
-</a>
 <h2>⚙️ stacks ⚙️</h2>
 <div style="display:flex">
 
- <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+ <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=black">
+<img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=black">
+<img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge">
 
 </div>
-<h2>⚙️ the api is in development ⚙️ </h2>
 
-<p>api returns data from jojo's bizarre adventures manga stands</p>
+
+
 <h2>usage</h2>
+<h3>instalation</h3>
+<p>
+config a .env file:
+<pre>
+PORT=port of api
+SECRET="secret for sessions"
+DB_PASSWORD="DATABASE PASSWORD"
+
+ADM_PASS="ADM PASS"
+ADM_NAME="ADM NAME"
+ADM_MAIL="ADM@MAIL"
+</pre>
+</p>
+<p>
+init the containers of application with docker compose:
+<pre>
+docker-compose up
+</pre>
+
+</p>
+<p>
+   insert in database the stands info:<br>
+   <strong> in Linux: (check the container name) </strong>
+   <pre>
+   bash migrate.sh
+   </pre>
+ <strong> in Windows: </strong>
+   <pre>
+docker cp ./sql/inserts.sql container-name:./inserts.sql
+
+docker exec -it container-name mysql -u root -p  --execute 'source ./inserts.sql';
+
+   </pre>
+</p>
+
+<h3>requests: </h3>
 <em>
-    const url = 'https://jojo-api.herokuapp.com/jojostands'
+    const url = 'apiurl/stands'
 
    fetch(url).then((res) => {
         return res.json()

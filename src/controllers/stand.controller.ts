@@ -18,7 +18,7 @@ export class StandController implements Controller {
     }
 
     defineRoutes() {
-        this.router.get('/get/:id', async (req: Request, res: Response) => {
+        this.router.get(['/get/:id','/get'], async (req: Request, res: Response) => {
             try {
                 const response = await this.StandService.get(req.params.id)
                 res.send(response)
