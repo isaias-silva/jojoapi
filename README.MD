@@ -50,7 +50,7 @@ docker exec -it container-name mysql -u root -p  --execute 'source ./inserts.sql
 
 <h3>requests: </h3>
 <em>
-    const url = 'apiurl/stands'
+    const url = 'apiurl/stands/get'
 
    fetch(url).then((res) => {
         return res.json()
