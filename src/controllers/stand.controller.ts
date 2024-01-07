@@ -18,14 +18,24 @@ export class StandController implements Controller {
     }
 
     defineRoutes() {
+        this.router.get('/get/:id', async (req: Request, res: Response) => {
+            try {
+                const response = await this.StandService.get(req.params.id)
+                res.send(response)
+                
+            } catch (err: any) {
+                res.status(err.status || 500).render('error.ejs', { status: err.status || 500, msg: err.message || 'internal' })
+
+            }
+        })
         this.router.get('/guide', async (req: Request, res: Response) => {
-            const data=await this.StandService.get()
-          
+            const data = await this.StandService.get()
+
             res.render('index.ejs', { key: "guide", data, session: req.session.user })
         })
         this.router.get('/admin', isLoging, async (req: Request, res: Response) => {
-           
-            const data=await this.StandService.get()
+
+            const data = await this.StandService.get()
 
             res.render('stands.ejs', { data, func: 'create', obj: null, session: req.session.user })
         })
